@@ -1,0 +1,43 @@
+Corpus: 1213 samples (1082 executed, 131 no monitored process)
+Signature stage ran in any report: False
+
+MILESTONE TIMING (seconds after first process start)
+milestone                                    n   median           95% CI     p10     p90
+file enumeration begins                    697   5.20 [  4.42,  5.67]   0.54  19.33
+first crypto context                       368   3.62 [  2.53,  8.16]   0.36  89.51
+first key gen/import                       204   2.94 [  2.27,  4.63]   0.50  66.58
+first CryptEncrypt                         135   8.16 [  6.64, 11.39]   1.29  53.36
+shadow/backup deletion cmd                 193  24.70 [ 17.70, 29.51]   3.05  60.27
+first ransom note                          346  21.52 [ 18.77, 23.11]   4.03  45.95
+paper metric: first victim write           462  19.91 [ 15.77, 22.16]   5.26  45.82
+first victim write (incl AppData)          526   8.65 [  7.24, 12.05]   0.39  35.26
+first irreversible damage                  508  15.51 [ 10.77, 18.14]   3.83  38.98
+  - high-entropy overwrite                 448  15.17 [ 10.66, 18.18]   3.83  58.95
+  - rename to new extension                424  21.16 [ 18.27, 24.12]   4.91  54.17
+  - victim-file delete                     207  14.48 [  9.41, 21.98]   5.85  83.88
+
+WRITE-CLASSIFICATION SENSITIVITY (median onset, s)
+  first victim write, paper-style exclusion : n= 462  median=19.91
+  first irreversible damage (our definition): n= 508  median=15.51
+
+LEAD TIME  crypto_ctx       -> damage : n= 280  signal-first=  59%  median lead=  3.71s
+LEAD TIME  crypto_key       -> damage : n= 148  signal-first=  77%  median lead=  8.04s
+LEAD TIME  enum             -> damage : n= 505  signal-first=  98%  median lead=  5.69s
+LEAD TIME  recovery_inhibit -> damage : n= 172  signal-first=  25%  median lead= -8.16s
+
+KAPLAN-MEIER onset (executed n=1082, events=508, censored=574)
+  KM median time-to-damage: 27.29s  (naive median over observed only: 15.51s)
+
+DETECTOR REPLAY: damage-events written before the detector reacts
+  (only samples that both triggered the signal and produced damage)
+  crypto-context monitor (react 0.5s)    n= 280  median lost=   0  mean=501.4  zero-loss= 59%
+  crypto-key monitor (react 0.5s)        n= 148  median lost=   0  mean= 28.7  zero-loss= 73%
+  enumeration monitor (react 1.0s)       n= 505  median lost=   0  mean=  0.5  zero-loss= 74%
+
+  CryptoDrop-style (trigger after k damage events); files lost = k-1 + late detections
+    k= 1: samples with damage= 508  median files damaged by trigger=1
+    k= 3: samples with damage= 508  median files damaged by trigger=3
+    k=10: samples with damage= 508  median files damaged by trigger=10
+
+PER-FAMILY: provide --labels task,family CSV to enable (classifier output needed).
+

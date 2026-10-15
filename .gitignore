@@ -1,0 +1,17 @@
+# Python environment (recreate with: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt)
+.venv/
+__pycache__/
+*.pyc
+
+# Intermediate traces: regenerate from CAPE reports with extract.py
+traces/
+traces_*/
+
+# Logs
+*.log
+
+# Never commit raw corpus material
+*.zip
+*.7z
+report.json
+**/analyses/

@@ -44,6 +44,28 @@ Input layout: `analyses/<task_id>/reports/report.json`, either as a zip or a
 directory. One worker can need 2–3 GB of RAM for the largest reports
 (about 250 MB of JSON).
 
+## Re-running samples on a new VM
+
+Timings depend on the analysis VM, so results from a rebuilt VM are pooled with
+the original corpus only if a subset of the original samples gives the same
+timings there.
+
+```bash
+# Pick the overlap set: 7 damaged samples from each sextile of time-to-damage,
+# plus 8 that never reached damage, with reserves (fixed seed)
+.venv/bin/python select_overlap.py --results results --out overlap
+
+# Download them from MalwareBazaar by SHA-256 (needs an Auth-Key in
+# $MB_AUTH_KEY or ~/.config/malwarebazaar/auth_key). Unavailable hashes are
+# replaced by a reserve from the same stratum.
+python3 -I fetch_samples.py --overlap-csv overlap/overlap_samples.csv --out ../samples/overlap
+```
+
+`fetch_samples.py` keeps each sample in MalwareBazaar's encrypted zip
+(password `infected`) and verifies its SHA-256 by streaming it through `7z`, so
+nothing is extracted to disk. It refuses to save into this repository.
+`overlap/` lists the selected samples and their original timings.
+
 ## Outputs (`results/`)
 
 | File | Contents |

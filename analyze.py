@@ -20,8 +20,37 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from lifelines import KaplanMeierFitter
 
-plt.rcParams.update({'figure.dpi': 130, 'font.size': 10, 'axes.grid': True,
-                     'grid.alpha': 0.3, 'axes.axisbelow': True})
+# Paper figures: drawn at IEEE single-column width so text prints at true size,
+# saved as vector PDF (plus a PNG preview). Series colors are slots 1-4 of a
+# CVD-validated categorical palette in fixed order; each series also gets its own
+# line style so identity survives grayscale printing.
+COL_W, COL_H = 3.5, 2.3
+SERIES = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100']
+STYLES = ['-', '--', '-.', ':']
+INK, MUTED = '#2b2b2b', '#6b6b6b'
+plt.rcParams.update({'figure.dpi': 150, 'savefig.dpi': 300, 'font.size': 8,
+                     'axes.labelsize': 8, 'xtick.labelsize': 7, 'ytick.labelsize': 7,
+                     'legend.fontsize': 7, 'legend.frameon': False,
+                     'axes.grid': True, 'grid.color': '#d9d9d9', 'grid.linewidth': 0.5,
+                     'axes.axisbelow': True, 'axes.edgecolor': MUTED, 'axes.linewidth': 0.6,
+                     'axes.spines.top': False, 'axes.spines.right': False,
+                     'xtick.color': MUTED, 'ytick.color': MUTED,
+                     'axes.labelcolor': INK, 'text.color': INK,
+                     'lines.linewidth': 1.4, 'pdf.fonttype': 42, 'ps.fonttype': 42})
+
+
+def log_seconds_axis(ax):
+    """Log x axis 0.1-130 s with plain-number tick labels."""
+    ax.set_xscale('log'); ax.set_xlim(0.1, 130)
+    ax.set_xticks([0.1, 1, 10, 100]); ax.set_xticklabels(['0.1', '1', '10', '100'])
+
+
+def save_fig(fig, out_dir, name):
+    """Write <name>.pdf (for the paper) and <name>.png (preview)."""
+    fig.tight_layout(pad=0.3)
+    for ext in ('pdf', 'png'):
+        fig.savefig(os.path.join(out_dir, f'{name}.{ext}'), bbox_inches='tight', pad_inches=0.02)
+    plt.close(fig)
 
 def boot_ci(x, stat=np.median, n=5000, seed=0):
     x = np.asarray(x, float); x = x[~np.isnan(x)]
@@ -179,45 +208,47 @@ def main():
     out.close()
 
     # ---------------------------------------------------------------- FIGURES ----
-    def cdf(ax, s, label):
+    def cdf(ax, s, label, i):
         s = np.sort(np.asarray(s, float)); s = s[~np.isnan(s)]
         if len(s) == 0:
             return
         y = np.arange(1, len(s) + 1) / len(s)
-        ax.step(s, y, where='post', label=f'{label} (n={len(s)})')
+        ax.step(s, y, where='post', color=SERIES[i], ls=STYLES[i], label=f'{label} (n={len(s)})')
 
+    # Titles live in the LaTeX captions, not in the figures.
     # Fig 1: milestone CDFs
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    for key, lab in [('crypto_ctx', 'first crypto context'),
-                     ('enum', 'file enumeration'),
-                     ('note', 'first ransom note'),
-                     ('damage', 'first irreversible damage')]:
-        cdf(ax, df['t_' + key], lab)
-    ax.set_xscale('log'); ax.set_xlim(0.1, 130)
-    ax.set_xlabel('seconds after execution start (log)'); ax.set_ylabel('cumulative fraction')
-    ax.set_title('Timing of ransomware milestones'); ax.legend(loc='lower right', fontsize=8)
-    fig.tight_layout(); fig.savefig(os.path.join(R, 'fig_milestones.png')); plt.close(fig)
+    fig, ax = plt.subplots(figsize=(COL_W, COL_H))
+    for i, (key, lab) in enumerate([('crypto_ctx', 'first crypto context'),
+                                    ('enum', 'file enumeration'),
+                                    ('note', 'first ransom note'),
+                                    ('damage', 'first irreversible damage')]):
+        cdf(ax, df['t_' + key], lab, i)
+    log_seconds_axis(ax); ax.set_ylim(0, 1)
+    ax.set_xlabel('seconds after execution start (log scale)'); ax.set_ylabel('cumulative fraction')
+    ax.legend(loc='upper left', handlelength=2.6)
+    save_fig(fig, R, 'fig_milestones')
 
     # Fig 2: KM survival (1 - survival = fraction damaged)
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    kmf.plot_cumulative_density(ax=ax, ci_show=True)
+    fig, ax = plt.subplots(figsize=(COL_W, COL_H))
+    kmf.plot_cumulative_density(ax=ax, ci_show=True, color=SERIES[0], lw=1.4,
+                                label='Kaplan-Meier estimate', ci_alpha=0.2)
+    ax.axhline(0.5, color=MUTED, lw=0.6, ls=':')
     ax.set_xlabel('seconds after execution start'); ax.set_ylabel('fraction of samples damaged')
-    ax.set_title('Kaplan-Meier: time to first irreversible damage\n(non-detonators censored at observation end)')
-    ax.set_xlim(0, 120); ax.legend(fontsize=8)
-    fig.tight_layout(); fig.savefig(os.path.join(R, 'fig_survival.png')); plt.close(fig)
+    ax.set_xlim(0, 120); ax.set_ylim(0, 1); ax.get_legend().remove()  # one series: caption names it
+    save_fig(fig, R, 'fig_survival')
 
     # Fig 3: lead-time histogram (crypto_ctx -> damage)
     both = df.dropna(subset=['t_damage', 't_crypto_ctx'])
     lead = (both['t_damage'] - both['t_crypto_ctx']).values
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    ax.hist(np.clip(lead, -10, 80), bins=40, color='#4477aa', edgecolor='white')
-    ax.axvline(0, color='crimson', lw=1.5, label='damage = signal')
-    ax.axvline(np.median(lead), color='k', ls='--', lw=1, label=f'median {np.median(lead):.1f}s')
-    ax.set_xlabel('lead time: first crypto context -> first damage (s)')
-    ax.set_ylabel('samples'); ax.set_title(f'Defensive lead time (n={len(lead)}, '
-                                           f'{100*(lead>0).mean():.0f}% signal-first)')
-    ax.legend(fontsize=8); fig.tight_layout()
-    fig.savefig(os.path.join(R, 'fig_leadtime.png')); plt.close(fig)
+    fig, ax = plt.subplots(figsize=(COL_W, COL_H))
+    ax.hist(np.clip(lead, -10, 80), bins=45, color=SERIES[0], edgecolor='white', linewidth=0.4)
+    ax.axvline(0, color=INK, lw=0.9, label='damage at signal time')
+    ax.axvline(np.median(lead), color=INK, ls='--', lw=0.9, label=f'median lead {np.median(lead):.1f} s')
+    ax.set_xlabel('lead time, first crypto context to first damage (s)')
+    ax.set_ylabel('samples'); ax.set_xlim(-11, 81); ax.legend(loc='upper right')
+    ax.set_xticks([-10, 0, 20, 40, 60, 80])
+    ax.set_xticklabels(['\u2264\u221210', '0', '20', '40', '60', '\u226580'])  # end bins are clipped
+    save_fig(fig, R, 'fig_leadtime')
 
     # Fig 4: detector replay - files lost before crypto-context reaction
     losses = []
@@ -227,27 +258,29 @@ def main():
         fl = files_lost(row['task'], row['t_crypto_ctx'], 0.5)
         if fl is not None:
             losses.append(fl)
-    fig, ax = plt.subplots(figsize=(7, 4.5))
+    fig, ax = plt.subplots(figsize=(COL_W, COL_H))
     if losses:
         losses = np.array(losses)
-        ax.hist(np.clip(losses, 0, 50), bins=range(0, 52), color='#aa5544', edgecolor='white')
-        ax.set_xlabel('damage events before a crypto-context detector reacts')
-        ax.set_ylabel('samples')
-        ax.set_title(f'Files damaged before detection (n={len(losses)}, '
-                     f'{100*(losses==0).mean():.0f}% zero-loss)')
-    fig.tight_layout(); fig.savefig(os.path.join(R, 'fig_detector.png')); plt.close(fig)
+        ax.hist(np.clip(losses, 0, 50), bins=range(0, 52), color=SERIES[0], edgecolor='white',
+                linewidth=0.4)
+        ax.set_xlabel('damage events before the detector reacts')
+        ax.set_ylabel('samples'); ax.set_xlim(0, 51)
+        ax.set_xticks([0, 10, 20, 30, 40, 50])
+        ax.set_xticklabels(['0', '10', '20', '30', '40', '\u226550'])  # last bin is clipped
+        ax.text(0.98, 0.95, f'n = {len(losses)}; {100*(losses==0).mean():.0f}% zero loss',
+                transform=ax.transAxes, ha='right', va='top', fontsize=7)
+    save_fig(fig, R, 'fig_detector')
 
     # Fig 5: write-classification sensitivity
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    for key, lab in [('victim_write', 'any victim write (incl AppData)'),
-                     ('paper_first_write', 'paper-style exclusion'),
-                     ('damage', 'irreversible damage only')]:
-        cdf(ax, df['t_' + key], lab)
-    ax.set_xscale('log'); ax.set_xlim(0.1, 130)
-    ax.set_xlabel('seconds after execution start (log)'); ax.set_ylabel('cumulative fraction')
-    ax.set_title('Onset depends on how "damage" is defined')
-    ax.legend(loc='lower right', fontsize=8)
-    fig.tight_layout(); fig.savefig(os.path.join(R, 'fig_writeclass.png')); plt.close(fig)
+    fig, ax = plt.subplots(figsize=(COL_W, COL_H))
+    for i, (key, lab) in enumerate([('victim_write', 'any victim write (incl. AppData)'),
+                                    ('paper_first_write', 'paper-style exclusion'),
+                                    ('damage', 'irreversible damage only')]):
+        cdf(ax, df['t_' + key], lab, i)
+    log_seconds_axis(ax); ax.set_ylim(0, 1)
+    ax.set_xlabel('seconds after execution start (log scale)'); ax.set_ylabel('cumulative fraction')
+    ax.legend(loc='upper left', handlelength=2.6)
+    save_fig(fig, R, 'fig_writeclass')
 
     print('\nFigures written to', R)
 

@@ -1,0 +1,27 @@
+paired samples: 50 of 50 selected
+new runs executed: 50/50
+
+t_damage: reached both=38 orig-only=4 new-only=2 neither=6
+  median orig=17.01s new=3.63s median diff=-6.22s IQR=[-24.36, -0.98]
+  Spearman rho=0.154 (p=0.36)  Wilcoxon p=1.51e-09  within 2x: 42%
+  McNemar exact p=0.688 (discordant 4 vs 2)
+
+t_enum: reached both=45 orig-only=1 new-only=0 neither=4
+  median orig=5.97s new=2.33s median diff=-1.01s IQR=[-5.20, +0.06]
+  Spearman rho=0.667 (p=5.8e-07)  Wilcoxon p=0.0184  within 2x: 42%
+  McNemar exact p=1 (discordant 1 vs 0)
+
+t_crypto_ctx: reached both=25 orig-only=0 new-only=17 neither=8
+  median orig=2.38s new=0.22s median diff=-1.42s IQR=[-3.43, -0.30]
+  Spearman rho=0.794 (p=2.1e-06)  Wilcoxon p=0.00025  within 2x: 32%
+  McNemar exact p=1.53e-05 (discordant 0 vs 17)
+
+t_crypto_key: reached both=14 orig-only=1 new-only=0 neither=35
+  median orig=2.20s new=0.18s median diff=-1.55s IQR=[-2.70, -1.23]
+  Spearman rho=0.920 (p=3.3e-06)  Wilcoxon p=0.000122  within 2x: 29%
+  McNemar exact p=1 (discordant 1 vs 0)
+
+t_note: reached both=25 orig-only=1 new-only=1 neither=23
+  median orig=23.09s new=4.70s median diff=-14.94s IQR=[-25.49, -2.03]
+  Spearman rho=0.287 (p=0.16)  Wilcoxon p=5.39e-05  within 2x: 40%
+  McNemar exact p=1 (discordant 1 vs 1)

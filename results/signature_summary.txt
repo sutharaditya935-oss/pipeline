@@ -1,0 +1,85 @@
+analyses processed: 1213 of 1213; errors: 0
+
+[all analyses] n=1213 executed=1082
+  >=1 signature: 96.8% of all, 100.0% of executed; median matched per executed analysis: 23
+  new malstatus (all):      {'Malicious': 713, 'Clean': 335, 'Failed': 110, 'Suspicious': 53, 'Undetected': 1}
+  new malstatus (executed): {'Malicious': 707, 'Clean': 321, 'Suspicious': 53, 'Undetected': 1}
+  original malstatus:       {'Undetected': 910, 'Malicious': 178, 'Failed': 124}
+  original -> new malstatus:
+new_status  Clean  Failed  Malicious  Suspicious  Undetected
+malstatus                                                   
+Failed         14     110          0           0           0
+Malicious       0       0        178           0           0
+Undetected    321       0        535          53           1
+
+[ransomware] n=1138 executed=1044
+  >=1 signature: 96.6% of all, 100.0% of executed; median matched per executed analysis: 23
+  new malstatus (all):      {'Malicious': 687, 'Clean': 328, 'Failed': 74, 'Suspicious': 47, 'Undetected': 1}
+  new malstatus (executed): {'Malicious': 681, 'Clean': 315, 'Suspicious': 47, 'Undetected': 1}
+  original malstatus:       {'Undetected': 876, 'Malicious': 174, 'Failed': 87}
+  original -> new malstatus:
+new_status  Clean  Failed  Malicious  Suspicious  Undetected
+malstatus                                                   
+Failed         13      74          0           0           0
+Malicious       0       0        174           0           0
+Undetected    315       0        513          47           1
+
+Ransomware-behavior signature vs. pipeline damage label (executed ransomware):
+ransomware signature  False  True 
+pipeline damage                   
+False                   530     20
+True                     17    477
+  ransomware signatures: {'ransomware_file_modifications': 488, 'mass_ransom_note_drop': 302, 'ransomware_message': 244, 'ransomware_files': 170, 'ransomware_iocp_asynchronous_encryption': 159, 'ransomware_attribute_stripping': 114, 'ransomware_extension_hijack': 48, 'ransomware_extensions_known': 36, 'ransomware_extensions_generic': 4}
+
+Top signatures (share of executed ransomware samples):
+   93.7%  dllload_suspicious_directory
+   79.6%  antidebug_setunhandledexceptionfilter
+   79.0%  privilege_elevation_check
+   75.5%  language_check_registry
+   60.0%  query_fips_reconnaissance
+   59.9%  stealth_timeout
+   56.1%  stealth_network
+   55.9%  queries_keyboard_layout
+   52.7%  mountpoint_manager_access
+   52.4%  queries_locale_api
+   49.6%  per_file_acl_token_check
+   49.3%  discover_registry_mount_points
+   48.3%  mountpoints_volume_discovery
+   48.3%  antivm_checks_available_memory
+   47.7%  creates_suspended_process
+   47.3%  resumethread_remote_process
+   46.7%  ransomware_file_modifications
+   46.6%  hardware_id_profiling
+   43.2%  infostealer_cookies
+   42.5%  folder_enumeration
+
+Top ATT&CK techniques (share of executed ransomware samples):
+   98.7%  T1071
+   94.6%  T1574
+   84.7%  T1082
+   82.7%  T1070
+   79.0%  T1033
+   77.6%  T1027
+   71.1%  T1055
+   60.4%  T1027.002
+   59.2%  T1070.006
+   55.7%  T1485
+   49.6%  T1069
+   48.0%  T1486
+   46.4%  T1036
+   43.2%  T1539
+   42.9%  T1083
+
+Per family (executed ransomware, families with >= 10 executed):
+  Babuk        n=  60 median sigs=  23  Malicious=80.0%  ransom-sig=68.3%  damaged=55.0%
+  BlackCat     n=  68 median sigs=   8  Malicious= 1.5%  ransom-sig= 0.0%  damaged= 0.0%
+  BlackMatter  n=  34 median sigs=  49  Malicious=91.2%  ransom-sig=88.2%  damaged=88.2%
+  Conti        n= 136 median sigs=  28  Malicious=81.6%  ransom-sig=55.9%  damaged=55.9%
+  Dharma       n=  74 median sigs=  42  Malicious=100.0%  ransom-sig=95.9%  damaged=98.6%
+  LockBit      n= 169 median sigs=  43  Malicious=81.7%  ransom-sig=67.5%  damaged=65.7%
+  Maze         n=  14 median sigs=  43  Malicious=71.4%  ransom-sig=64.3%  damaged=64.3%
+  Phobos       n= 112 median sigs=  43  Malicious=77.7%  ransom-sig=71.4%  damaged=73.2%
+  REvil        n= 115 median sigs=  23  Malicious=94.8%  ransom-sig=25.2%  damaged=29.6%
+  Ryuk         n=  32 median sigs=  30  Malicious=84.4%  ransom-sig=62.5%  damaged=71.9%
+  WannaCry     n= 171 median sigs=   6  Malicious= 1.2%  ransom-sig= 0.6%  damaged= 1.2%
+  unknown      n=  21 median sigs=  19  Malicious=76.2%  ransom-sig=42.9%  damaged=33.3%

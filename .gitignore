@@ -21,3 +21,7 @@ results_sensitivity/*/
 
 # Annotation sheets and the heuristic key stay private until annotation is finished
 annotation/
+
+# Raw signature output (170 MB); the gzipped copy is committed
+results/signatures.jsonl
+results/sig_run.log

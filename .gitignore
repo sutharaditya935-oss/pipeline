@@ -25,3 +25,7 @@ annotation/
 # Raw signature output (170 MB); the gzipped copy is committed
 results/signatures.jsonl
 results/sig_run.log
+
+# Benign baseline: downloaded program files and per-batch run data stay local
+benign/*/staging/
+benign/*/reports/

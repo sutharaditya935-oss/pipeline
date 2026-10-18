@@ -1,0 +1,2 @@
+id,name,version,category,hard_case,source_url,license,filename,sha256,package,arguments,timeout,how_run,notes
+B001,ExampleProgram,1.2.3,archiver,yes,https://example.org/download/,MIT,exampleprogram-1.2.3-setup.exe,0000000000000000000000000000000000000000000000000000000000000000,exe,/S,120,silent install then idle,EXAMPLE ROW: replace with real programs and delete this line

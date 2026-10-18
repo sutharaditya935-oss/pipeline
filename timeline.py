@@ -132,6 +132,12 @@ PROC_LAUNCH = {'CreateProcessInternalW', 'NtCreateUserProcess', 'ShellExecuteExW
 HIGH_ENTROPY = 7.0   # bits/byte over a >=64-byte captured buffer
 MIN_ENTROPY_LEN = 64
 
+
+def set_thresholds(entropy, min_len):
+    """Override the damage thresholds (used for the sensitivity analysis)."""
+    global HIGH_ENTROPY, MIN_ENTROPY_LEN
+    HIGH_ENTROPY, MIN_ENTROPY_LEN = entropy, min_len
+
 COMMON_EXT = {'.txt', '.log', '.tmp', '.dat', '.ini', '.xml', '.json', '.dll', '.exe',
               '.lnk', '.db', '.bak', '.old', '.cfg', '.config', '.manifest', ''}
 
@@ -256,7 +262,12 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--traces', required=True)
     ap.add_argument('--out', required=True)
+    ap.add_argument('--entropy', type=float, default=HIGH_ENTROPY,
+                    help=f'high-entropy overwrite threshold, bits/byte (default {HIGH_ENTROPY})')
+    ap.add_argument('--min-len', type=int, default=MIN_ENTROPY_LEN,
+                    help=f'minimum captured bytes for the entropy test (default {MIN_ENTROPY_LEN})')
     a = ap.parse_args()
+    set_thresholds(a.entropy, a.min_len)
     os.makedirs(a.out, exist_ok=True)
     paths = sorted(glob.glob(os.path.join(a.traces, '*.jsonl.gz')))
     print(f'{len(paths)} traces', flush=True)

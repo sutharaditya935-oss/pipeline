@@ -1,0 +1,19 @@
+reports: n=1214  median 13.5 MB  max 251.0 MB
+malstatus: {'Failed': 124, 'Malicious': 178, 'Undetected': 910}
+
+1-2. Registry settings read by samples (analyses, first read each):
+  defender DisableRealtimeMonitoring    {'0': 46}  (analyses: 46)
+  defender DisableIOAVProtection        {'1': 46}  (analyses: 46)
+  uac      EnableLUA                    {'1': 44}  (analyses: 44)
+  uac      ConsentPromptBehaviorAdmin   {'5': 43}  (analyses: 43)
+  uac      PromptOnSecureDesktop        {'1': 39}  (analyses: 39)
+
+3. Original analyses that touched drive D:
+  277 analyses
+
+4. Overlap originals (50) writing into stale analyzer dirs before first damage:
+  16 of 50
+
+5. Write attempts to Program Files / System32 (overlap samples): original vs rebuild 1
+  original  ok=7215 denied=24281 (77% denied); samples with >=1 successful write: 17
+  rebuild 1 ok=24456 denied=24581 (50% denied); samples with >=1 successful write: 29

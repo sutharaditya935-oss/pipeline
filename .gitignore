@@ -15,3 +15,6 @@ traces_*/
 *.7z
 report.json
 **/analyses/
+
+# Sensitivity variants: regenerate with sensitivity.py (only the summary is kept)
+results_sensitivity/*/

@@ -29,3 +29,20 @@ software, run in the same CAPE lab as the ransomware corpus.
 Rules learned from the ransomware batch: record everything up front, one lab
 snapshot per batch, no manual interaction with the guest during runs, and keep the
 benign batch separate from the ransomware corpus statistics.
+
+## Candidate list and the UAC triage
+- The candidate pool (`~/Downloads/benign_corpus.xlsx`, 141 tasks / 122 programs) was
+  drafted outside this tool. `classify_corpus.py` sorts it by whether a program can
+  run under the lab's default UAC (unelevated launch): group A likely OK, B verify,
+  C likely needs administrator or cannot run offline -> `batch1/sorted_candidates.xlsx|csv`.
+  The sort is an estimate from how each tool is normally packaged.
+- **Launch triage (confirms the sort):** put the A and B downloads in `batch1/staging/`,
+  list them in `programs.csv` with `timeout` = 20, run `benign_submit.py` (about 20 s per
+  program), then `benign_triage.py --subs batch1/submissions.csv --out batch1/triage.csv`.
+  Programs reporting `needs_admin_740`, `bad_exe_format` or `wrong_arch` leave the baseline
+  (and are reported as such); the rest go into the real batch at the normal 120 s timeout.
+- One row in the pool is a task, one program may have several; a task needs a script/command
+  line to drive it. Report false-positive rates per task AND per program (bootstrap by
+  program), because tasks of one program are not independent.
+- Expected "Triggers E/K/H" columns in the pool are predictions, not results.
+

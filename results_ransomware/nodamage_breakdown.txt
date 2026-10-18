@@ -1,0 +1,16 @@
+Ransomware samples: 1138; reached damage: 494; did not: 644
+
+A. never started: 94
+       44  %1 is not a valid Win32 application (ERROR_BA
+       32  740
+       12  (no error logged)
+        6  This version of %1 is not compatible with the
+B. executed, setup-blocked families: WannaCry DLL components 169, BlackCat 68
+C. other DLL-package samples: 39
+D. other executed samples by run length: {'<5 s': 71, '5-30 s': 46, '30-90 s': 22, '>90 s': 135}
+   of the >90 s runs: enumerated victim files 112, any victim write 12, crypto context 27, ransom note 7
+
+Headline timing with setup-blocked samples removed:
+  all ransomware                 n=1138 executed=1044 damaged=494 (47% of executed)  median=15.81s  KM median=26.82s
+  excl. WannaCry DLL + BlackCat  n= 898 executed= 807 damaged=494 (61% of executed)  median=15.81s  KM median=26.39s
+  also excl. all DLL packages    n= 836 executed= 745 damaged=471 (63% of executed)  median=16.14s  KM median=26.32s

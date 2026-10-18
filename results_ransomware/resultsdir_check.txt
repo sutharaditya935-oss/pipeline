@@ -1,0 +1,5 @@
+analyses with a logged results directory: 1219
+damaged samples with damage events in it: 40; first damage event in it: 2
+damage events in it: 222 of 1008773 (0.022%)
+headline as published : damaged n=494  median=15.81 s  KM median=26.82 s
+excluding results dir : damaged n=492  median=15.64 s  KM median=26.82 s

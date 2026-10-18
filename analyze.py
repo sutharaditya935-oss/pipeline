@@ -140,7 +140,29 @@ def main():
       f'censored={int((~observed[valid]).sum())})')
     p(f'  KM median time-to-damage: {med_km:.2f}s  (naive median over observed only: '
       f'{ex["t_damage"].median():.2f}s)')
+    # Percentile bootstrap over samples (2,000 resamples) for the KM median.
+    rng = np.random.default_rng(0)
+    d_v, o_v = dur[valid].values, observed[valid].values
+    bs = []
+    for _ in range(2000):
+        i = rng.integers(0, len(d_v), len(d_v))
+        k = KaplanMeierFitter().fit(d_v[i], event_observed=o_v[i])
+        bs.append(k.median_survival_time_)
+    bs = np.array(bs, float); bs = bs[np.isfinite(bs)]
+    p(f'  KM median 95% CI (bootstrap, 2000): [{np.percentile(bs, 2.5):.2f}, {np.percentile(bs, 97.5):.2f}]')
+    p(f'  KM fraction damaged by 120s (end of plotted window): {float(kmf.cumulative_density_at_times(120).iloc[0]):.3f}')
     p('')
+
+    # ---- 4b. Ransom-note vs no-note samples (among samples that reach damage) ---
+    dm = df.dropna(subset=['t_damage'])
+    has_note = dm['t_note'].notna()
+    if has_note.any() and (~has_note).any():
+        from scipy.stats import mannwhitneyu
+        u = mannwhitneyu(dm.loc[has_note, 't_damage'], dm.loc[~has_note, 't_damage'])
+        p(f'NOTE vs NO-NOTE onset: note n={has_note.sum()} median={dm.loc[has_note, "t_damage"].median():.2f}s; '
+          f'no-note n={(~has_note).sum()} median={dm.loc[~has_note, "t_damage"].median():.2f}s; '
+          f'Mann-Whitney p={u.pvalue:.2g}')
+        p('')
 
     # ---- 5. Detector replay: files damaged before reaction ---------------------
     dmg = {}
@@ -182,6 +204,8 @@ def main():
     for k in (1, 3, 10):
         pre = []
         for task, r in dmg.items():
+            if task not in tmap:  # restrict to the analyzed subset
+                continue
             ev = r['events']
             if len(ev) >= 1:
                 pre.append(min(k, len(ev)) - 0 if len(ev) < k else k)  # files damaged up to trigger

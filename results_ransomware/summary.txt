@@ -1,0 +1,57 @@
+Corpus: 1138 samples (1044 executed, 94 no monitored process)
+Signature stage ran in any report: False
+
+MILESTONE TIMING (seconds after first process start)
+milestone                                    n   median           95% CI     p10     p90
+file enumeration begins                    672   5.37 [  4.45,  5.69]   0.55  19.25
+first crypto context                       350   3.92 [  2.59, 12.89]   0.36  89.32
+first key gen/import                       196   2.89 [  2.27,  4.32]   0.51  66.49
+first CryptEncrypt                         133   8.16 [  6.64, 11.39]   1.47  54.96
+shadow/backup deletion cmd                 193  24.70 [ 17.70, 29.51]   3.05  60.27
+first ransom note                          344  21.45 [ 18.33, 23.08]   4.03  46.00
+paper metric: first victim write           460  19.75 [ 15.72, 22.14]   5.25  45.65
+first victim write (incl AppData)          512   8.67 [  7.26, 13.00]   0.35  35.28
+first irreversible damage                  494  15.81 [ 10.92, 18.40]   3.89  39.02
+  - high-entropy overwrite                 438  15.90 [ 10.80, 18.56]   3.94  59.34
+  - rename to new extension                420  21.20 [ 18.24, 24.12]   4.88  54.60
+  - victim-file delete                     200  13.59 [  9.23, 21.95]   5.84  92.66
+
+WRITE-CLASSIFICATION SENSITIVITY (median onset, s)
+  first victim write, paper-style exclusion : n= 460  median=19.75
+  first irreversible damage (our definition): n= 494  median=15.81
+
+LEAD TIME  crypto_ctx       -> damage : n= 274  signal-first=  60%  median lead=  3.73s
+LEAD TIME  crypto_key       -> damage : n= 147  signal-first=  78%  median lead=  8.14s
+LEAD TIME  enum             -> damage : n= 491  signal-first=  98%  median lead=  5.70s
+LEAD TIME  recovery_inhibit -> damage : n= 172  signal-first=  25%  median lead= -8.16s
+
+KAPLAN-MEIER onset (executed n=1044, events=494, censored=550)
+  KM median time-to-damage: 26.82s  (naive median over observed only: 15.81s)
+  KM median 95% CI (bootstrap, 2000): [24.34, 29.90]
+  KM fraction damaged by 120s (end of plotted window): 0.716
+
+NOTE vs NO-NOTE onset: note n=328 median=22.42s; no-note n=166 median=6.28s; Mann-Whitney p=3.2e-15
+
+DETECTOR REPLAY: damage-events written before the detector reacts
+  (only samples that both triggered the signal and produced damage)
+  crypto-context monitor (react 0.5s)    n= 274  median lost=   0  mean=505.6  zero-loss= 59%
+  crypto-key monitor (react 0.5s)        n= 147  median lost=   0  mean= 18.2  zero-loss= 73%
+  enumeration monitor (react 1.0s)       n= 491  median lost=   0  mean=  0.5  zero-loss= 74%
+
+  CryptoDrop-style (trigger after k damage events); files lost = k-1 + late detections
+    k= 1: samples with damage= 494  median files damaged by trigger=1
+    k= 3: samples with damage= 494  median files damaged by trigger=3
+    k=10: samples with damage= 494  median files damaged by trigger=10
+
+PER-FAMILY first-damage median (n>=5)
+  LockBit              n= 111  median= 29.60  p10=10.39
+  Phobos               n=  82  median=  6.28  p10= 5.19
+  Conti                n=  76  median= 15.51  p10= 6.77
+  Dharma               n=  73  median=  6.17  p10= 0.24
+  REvil                n=  34  median=  5.02  p10= 4.16
+  Babuk                n=  33  median=  4.89  p10= 4.08
+  BlackMatter          n=  30  median= 29.51  p10=22.94
+  Ryuk                 n=  23  median= 61.09  p10= 7.80
+  Maze                 n=   9  median= 19.55  p10= 7.68
+  unknown              n=   7  median=  3.80  p10= 2.23
+

@@ -27,6 +27,10 @@ LEAD TIME  recovery_inhibit -> damage : n= 172  signal-first=  25%  median lead=
 
 KAPLAN-MEIER onset (executed n=1082, events=508, censored=574)
   KM median time-to-damage: 27.29s  (naive median over observed only: 15.51s)
+  KM median 95% CI (bootstrap, 2000): [24.76, 30.28]
+  KM fraction damaged by 120s (end of plotted window): 0.704
+
+NOTE vs NO-NOTE onset: note n=330 median=22.63s; no-note n=178 median=6.34s; Mann-Whitney p=2.8e-16
 
 DETECTOR REPLAY: damage-events written before the detector reacts
   (only samples that both triggered the signal and produced damage)

@@ -181,14 +181,19 @@ def process_trace(header, events, sandbox_corpus):
 
     counts = collections.Counter()
     damage_events = []   # (t, path, kind) for detector replay
+    # slui.exe is Windows' licence-activation helper; it calls CryptAcquireContext on its own
+    # (seen on the first host's rebuilt VM, never in the original lab), so it is not ransomware signal
+    ignore_pids = {x['pid'] for x in header.get('procs', []) if x.get('name', '').lower() == 'slui.exe'}
 
     for e in events:
         api = e['a']
         t = e['t']
         ok = e.get('ok', False)
 
-        # crypto milestones (any process, success or not — presence is the signal)
-        if api in CRYPTO_CTX:
+        # crypto milestones (any process except slui.exe, success or not — presence is the signal)
+        if e.get('p') in ignore_pids:
+            pass
+        elif api in CRYPTO_CTX:
             mark('crypto_ctx', t)
         elif api in CRYPTO_KEY:
             mark('crypto_key', t)

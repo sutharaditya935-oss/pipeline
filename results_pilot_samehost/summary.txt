@@ -1,0 +1,16 @@
+pairs: 12 (a = run1, b = run2); executed on both: 12
+median run length (obs_end): run1 127.3 s, run2 125.0 s; median API calls: run1 65484, run2 76466
+
+t_damage: both=11 only-run1=0 only-run2=1 neither=0
+  median run1=5.14s run2=5.12s | paired diff (B-A) median=-0.22s IQR=[-0.65, -0.01]
+  Spearman rho=0.930 (p=3.3e-05)  Wilcoxon p=0.0645  within 2x: 82%
+
+t_enum: both=11 only-run1=0 only-run2=1 neither=0
+  median run1=5.11s run2=5.11s | paired diff (B-A) median=+0.00s IQR=[-0.01, +0.01]
+  Spearman rho=0.968 (p=1.1e-06)  Wilcoxon p=0.984  within 2x: 100%
+
+t_crypto_ctx: both=3 only-run1=0 only-run2=0 neither=9
+
+t_crypto_key: both=3 only-run1=0 only-run2=0 neither=9
+
+t_note: both=3 only-run1=0 only-run2=2 neither=7

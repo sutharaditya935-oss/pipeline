@@ -1,0 +1,16 @@
+pairs: 12 (a = i5-11400H, b = Ryzen5-5500U); executed on both: 12
+median run length (obs_end): i5-11400H 127.3 s, Ryzen5-5500U 121.7 s; median API calls: i5-11400H 65484, Ryzen5-5500U 35770
+
+t_damage: both=8 only-i5-11400H=3 only-Ryzen5-5500U=1 neither=0
+  median i5-11400H=5.13s Ryzen5-5500U=6.31s | paired diff (B-A) median=+1.33s IQR=[+0.03, +1.89]
+  Spearman rho=0.905 (p=0.002)  Wilcoxon p=0.312  within 2x: 75%
+
+t_enum: both=10 only-i5-11400H=1 only-Ryzen5-5500U=1 neither=0
+  median i5-11400H=4.72s Ryzen5-5500U=5.26s | paired diff (B-A) median=+0.20s IQR=[+0.14, +0.24]
+  Spearman rho=0.782 (p=0.0075)  Wilcoxon p=0.00195  within 2x: 100%
+
+t_crypto_ctx: both=3 only-i5-11400H=9 only-Ryzen5-5500U=0 neither=0
+
+t_crypto_key: both=3 only-i5-11400H=0 only-Ryzen5-5500U=0 neither=9
+
+t_note: both=2 only-i5-11400H=1 only-Ryzen5-5500U=3 neither=6

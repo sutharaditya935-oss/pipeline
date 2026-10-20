@@ -36,15 +36,15 @@ def main():
                label=f'damage on both (n = {len(both)}, ρ = {rho:.2f})')
     oa = m[m.t_damage_a.notna() & m.t_damage_b.isna()]; ob = m[m.t_damage_a.isna() & m.t_damage_b.notna()]
     ax.scatter(oa.t_damage_a, np.full(len(oa), edge), s=16, marker='v', facecolors='none', edgecolors=SERIES[1], linewidths=0.8,
-               zorder=3, label=f'only on {a.a_name.split()[0]} (n = {len(oa)})')
+               zorder=3, label=f'only on {a.a_name} (n = {len(oa)})')
     ax.scatter(np.full(len(ob), edge), ob.t_damage_b, s=16, marker='<', facecolors='none', edgecolors=SERIES[2], linewidths=0.8,
-               zorder=3, label=f'only on {a.b_name.split()[0]} (n = {len(ob)})')
+               zorder=3, label=f'only on {a.b_name} (n = {len(ob)})')
     ax.set_xscale('log'); ax.set_yscale('log'); ax.set_xlim(*lims); ax.set_ylim(*lims)
     ticks = [0.1, 1, 10, 100]; ax.set_xticks(ticks); ax.set_yticks(ticks)
     ax.set_xticklabels(['0.1', '1', '10', '100']); ax.set_yticklabels(['0.1', '1', '10', '100'])
     ax.axhline(edge * 0.72, color='#d9d9d9', lw=0.6, zorder=0); ax.axvline(edge * 0.72, color='#d9d9d9', lw=0.6, zorder=0)
     ax.set_xlabel(f'{a.a_name}: time to first damage (s)'); ax.set_ylabel(f'{a.b_name} (s)')
-    ax.legend(loc='lower right', bbox_to_anchor=(1.0, 0.0), fontsize=5.6, handletextpad=0.2, borderaxespad=0.2, labelspacing=0.3)
+    ax.legend(loc='lower right', bbox_to_anchor=(1.0, 0.0), fontsize=5.2, handletextpad=0.2, borderaxespad=0.2, labelspacing=0.3)
     ax.set_aspect('equal'); ax.text(-0.2, 1.03, '(a)', transform=ax.transAxes, fontsize=8, fontweight='bold')
 
     # (b) paired gap per milestone, B - A (median and IQR), with agreement
@@ -57,7 +57,7 @@ def main():
         bx.text(5.9, i, f'ρ = {r:.2f}', fontsize=6.5, va='center', ha='right', color=MUTED)
     bx.axvline(0, color=MUTED, lw=0.8, ls=':', zorder=1)
     bx.set_yticks(range(len(MILES))); bx.set_yticklabels([l for _, l in MILES]); bx.invert_yaxis()
-    bx.set_xlim(-1, 6); bx.set_xticks(range(-1, 7)); bx.set_xlabel(f'{a.b_name.split()[0]} minus {a.a_name.split()[0]} (s): median, IQR')
+    bx.set_xlim(-1, 6); bx.set_xticks(range(-1, 7)); bx.set_xlabel(f'{a.b_name} minus {a.a_name} (s)\nmedian and interquartile range')
     bx.text(-0.2, 1.06, '(b)', transform=bx.transAxes, fontsize=8, fontweight='bold')
     for s in ('top', 'right'): bx.spines[s].set_visible(False)
 

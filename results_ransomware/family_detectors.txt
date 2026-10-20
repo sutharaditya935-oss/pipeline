@@ -1,0 +1,15 @@
+family        n   | enum cov zl  | ctx cov  zl (of exposing) | key cov  zl (of exposing) | protected by key-or-ctx
+LockBit      110  |  100%   58% |   25%   21% |    5%  100% |   6/110 =    5%
+Phobos        81  |  100%   42% |    5%  100% |    5%  100% |   4/ 81 =    5%
+Conti         76  |  100%   86% |   99%  100% |   89%  100% |  75/ 76 =   99%
+Dharma        71  |  100%   66% |    3%   50% |    1%    0% |   1/ 71 =    1%
+REvil         34  |  100%   44% |    3%    0% |    3%    0% |   0/ 34 =    0%
+Babuk         33  |  100%   33% |   97%  100% |    9%   67% |  32/ 33 =   97%
+BlackMatter   30  |  100%   93% |   87%    0% |    0%  nan% |   0/ 30 =    0%
+Ryuk          19  |  100%   53% |  100%  100% |  100%  100% |  19/ 19 =  100%
+Maze           9  |  100%   11% |  100%  100% |  100%   33% |   9/  9 =  100%
+unknown        7  |  100%   71% |   14%  100% |   14%    0% |   1/  7 =   14%
+ALL          484  |  100%   60% |   43%   75% |   25%   90% | 157/484 =   32%
+
+benign cost of "key generation OR crypto context": 5/50 = 10% [95% Wilson 4, 21]
+overall: protects 32% of damaged samples (157/484); families with zero protected samples: REvil, BlackMatter

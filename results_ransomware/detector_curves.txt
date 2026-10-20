@@ -1,0 +1,26 @@
+1. ZONE OF THE FIRST DAMAGE EVENT (484 damaged ransomware samples)
+   AppData                     196 (40.5%)  median onset   6.30 s
+   Program Files/ProgramData     6 ( 1.2%)  median onset   7.28 s
+   drive root / other          185 (38.2%)  median onset  25.78 s
+   other profile                84 (17.4%)  median onset  17.23 s
+   user folders                 13 ( 2.7%)  median onset  16.20 s
+   samples with ANY damage event in the user folders (Documents/Desktop/Pictures/...): 231 (48%)
+   time to first damage in the user folders (those 231 samples): median 21.66 s, p10 9.94 s; median damage events there 7
+
+2. CRYPTODROP-STYLE DETECTOR (fires at the k-th damage event; reaction 0.5 s). Benign: 50 executed programs.
+     k | benign FPR (95% CI)      | ransomware reaching k events | median files lost | p90 lost | lost <= 10
+     1 |  7/50  14.0% [ 7.0, 26.2] | 484/484 (100%)        |      2            |      6   |   93%
+     2 |  6/50  12.0% [ 5.6, 23.8] | 468/484 ( 97%)        |      3            |     42   |   79%
+     3 |  5/50  10.0% [ 4.3, 21.4] | 450/484 ( 93%)        |      6            |     57   |   69%
+     5 |  5/50  10.0% [ 4.3, 21.4] | 426/484 ( 88%)        |     16            |     74   |   45%
+    10 |  5/50  10.0% [ 4.3, 21.4] | 360/484 ( 74%)        |     30            |     75   |   15%
+    20 |  4/50   8.0% [ 3.2, 18.8] | 338/484 ( 70%)        |     45            |     83   |    0%
+    50 |  4/50   8.0% [ 3.2, 18.8] | 317/484 ( 65%)        |     76            |    144   |    0%
+   100 |  3/50   6.0% [ 2.1, 16.2] | 305/484 ( 63%)        |    134            |    221   |    0%
+   benign damage-event counts: sdelete 5501, TreeSize Free 1591, zstd 219, lz4 89, kopia 13, restic 2, gh 1
+
+3. BOOTSTRAP 95% CIs (2,000 resamples of damaged samples)
+   file enumeration  n=484  signal-first  96% [ 95, 98]  median lead  2.51 s [ 1.77, 3.06]  zero-loss  60% [ 56, 64]
+   crypto context    n=209  signal-first  76% [ 70, 81]  median lead  6.94 s [ 4.41, 8.59]  zero-loss  75% [ 69, 80]
+   key generation    n=120  signal-first  96% [ 92, 99]  median lead  9.99 s [ 8.45,13.70]  zero-loss  90% [ 84, 95]
+   recovery inhibit. n=172  signal-first  25% [ 19, 31]  median lead -8.16 s [-10.29,-6.56]  zero-loss  24% [ 18, 31]

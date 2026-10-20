@@ -80,6 +80,9 @@ for h in intel ideapad; do
   $PY benign_analyze.py --benign results_benign_$h/timelines.csv --index ~/benign_reports_$h/index_attributable.csv --ransom results_ransomware --out results_benign_$h/false_positives.txt > /dev/null
   $PY benign_analyze.py --benign results_benign_${h}_naive/timelines.csv --index ~/benign_reports_$h/index.csv --ransom results_ransomware_naive --out results_benign_${h}_naive/false_positives.txt > /dev/null
 done
+$PY detector_curves.py --ransom results_ransomware --benign results_benign_intel --index ~/benign_reports_intel/index_attributable.csv --out results_ransomware/detector_curves.txt > /dev/null
+$PY family_robustness.py --results results_ransomware --labels $L --traces traces --out results_ransomware/family_robustness.txt > /dev/null
+$PY family_detectors.py --results results_ransomware --labels $L --benign results_benign_intel --index ~/benign_reports_intel/index_attributable.csv --out results_ransomware/family_detectors.txt > /dev/null
 $PY benign_hosts.py --a results_benign_intel --b results_benign_ideapad --index-a ~/benign_reports_intel/index_attributable.csv --index-b ~/benign_reports_ideapad/index_attributable.csv --out results_benign_intel/two_hosts.txt > /dev/null
 $PY repl_stats.py --paired results_repl_compare/paired.csv --batches ../samples/overlap/submissions_repl_intel_batch1.csv ../samples/overlap/submissions_repl_intel_batch2.csv --truncated 340 352 355 356 358 --out results_repl_compare/agreement.txt > /dev/null
 $PY overlap_table.py --orig overlap/overlap_samples_attributed.csv --r1 results_overlap/timelines.csv --r2 results_overlap_v2/timelines.csv > results_overlap_v2/overlap_table.txt

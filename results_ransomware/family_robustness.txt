@@ -1,0 +1,52 @@
+executed ransomware samples 1044; damaged 484; families 31
+
+1. AS REPORTED
+   damaged n=484.00 | median onset=16.42 | KM median=27.84 | enum first %=96.49 | enum lead=2.51 | enum zero-loss %=59.92 | ctx first %=75.60 | ctx lead=6.94 | ctx zero-loss %=75.12 | key first %=95.83 | key lead=9.99 | key zero-loss %=90.00
+
+2. CLUSTER BOOTSTRAP over 31 families (2000 resamples): 95% interval
+   damaged n          as reported  484.00   [ 199.00,  823.07]
+   median onset       as reported   16.42   [   6.45,   26.39]
+   KM median          as reported   27.84   [  15.14,   65.66]
+   enum first %       as reported   96.49   [  93.07,   99.56]
+   enum lead          as reported    2.51   [   0.70,    4.34]
+   enum zero-loss %   as reported   59.92   [  47.02,   72.07]
+   ctx first %        as reported   75.60   [  34.86,   99.08]
+   ctx lead           as reported    6.94   [  -7.66,   12.35]
+   ctx zero-loss %    as reported   75.12   [  33.84,   98.54]
+   key first %        as reported   95.83   [  78.26,   98.98]
+   key lead           as reported    9.99   [   1.06,   28.95]
+   key zero-loss %    as reported   90.00   [  53.85,   98.02]
+
+3. LEAVE-ONE-FAMILY-OUT (8 families with >= 15 damaged samples): range of each metric
+   damaged n          as reported  484.00   min  374.00 (without LockBit)   max  465.00 (without Ryuk)
+   median onset       as reported   16.42   min    9.30 (without LockBit)   max   19.52 (without Phobos)
+   KM median          as reported   27.84   min   24.31 (without LockBit)   max   30.45 (without Phobos)
+   enum first %       as reported   96.49   min   95.78 (without Phobos)   max   97.86 (without LockBit)
+   enum lead          as reported    2.51   min    1.77 (without Conti)   max    2.95 (without Phobos)
+   enum zero-loss %   as reported   59.92   min   55.15 (without Conti)   max   63.52 (without Phobos)
+   ctx first %        as reported   75.60   min   61.94 (without Conti)   max   86.34 (without BlackMatter)
+   ctx lead           as reported    6.94   min    3.73 (without Conti)   max    8.50 (without BlackMatter)
+   ctx zero-loss %    as reported   75.12   min   61.19 (without Conti)   max   85.79 (without BlackMatter)
+   key first %        as reported   95.83   min   90.38 (without Conti)   max   96.64 (without Dharma)
+   key lead           as reported    9.99   min    8.15 (without Conti)   max   10.03 (without Phobos)
+   key zero-loss %    as reported   90.00   min   76.92 (without Conti)   max   90.76 (without Dharma)
+
+4. NEAR-DUPLICATES: 1044 samples in 510 (family, file size) groups; 89 groups hold 623 samples
+   one random sample per group (500 draws): median [2.5, 97.5 percentile] of each metric
+   damaged n          as reported  484.00   dedup  237.00   [ 232.00,  241.00]
+   median onset       as reported   16.42   dedup   21.47   [  21.09,   22.34]
+   KM median          as reported   27.84   dedup   33.97   [  33.53,   35.17]
+   enum first %       as reported   96.49   dedup   97.07   [  96.23,   97.50]
+   enum lead          as reported    2.51   dedup    3.27   [   3.22,    3.41]
+   enum zero-loss %   as reported   59.92   dedup   68.62   [  67.09,   69.94]
+   ctx first %        as reported   75.60   dedup   78.99   [  77.62,   80.43]
+   ctx lead           as reported    6.94   dedup    8.33   [   8.14,    8.54]
+   ctx zero-loss %    as reported   75.12   dedup   78.26   [  76.92,   79.71]
+   key first %        as reported   95.83   dedup   94.74   [  94.62,   94.85]
+   key lead           as reported    9.99   dedup    9.30   [   9.02,    9.83]
+   key zero-loss %    as reported   90.00   dedup   87.37   [  87.10,   87.63]
+
+5. FAMILY-WEIGHTED (each family counts once; families with >= 5 samples contributing to the metric)
+   enum families=10  median of family-median leads  1.44 s   mean signal-first   96%   mean zero-loss   56%
+   ctx  families= 6  median of family-median leads  2.94 s   mean signal-first   70%   mean zero-loss   70%
+   key  families= 4  median of family-median leads 10.32 s   mean signal-first  100%   mean zero-loss   83%

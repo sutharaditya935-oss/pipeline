@@ -21,6 +21,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.worksheet.datavalidation import DataValidation
 
+import timeline
 from timeline import (DELETE_APIS, MOVE_APIS, VICTIM_DAMAGE_ZONES, is_real_file,
                       looks_like_note, sandbox_dirs_in_trace, zone)
 
@@ -41,6 +42,11 @@ def load_trace(path):
     with gzip.open(path, 'rt') as f:
         header = json.loads(f.readline())
         events = [json.loads(l) for l in f]
+    # same attribution as the timeline stage: drop launcher shells and Windows helpers outside the sample
+    timeline.IGNORE_PROCS = {x for x in timeline.DEFAULT_IGNORE_PROCS.split(',') if x}
+    drop = timeline.attribution_drop_pids(header)
+    if drop:
+        events = [e for e in events if e.get('p') not in drop]
     return header, events
 
 
@@ -159,6 +165,8 @@ def write_book(path, samples, who):
         ('', False),
         ('For each sample, the Annotate sheet lists the first (up to) 12 modifications of distinct VICTIM files', False),
         ('(user folders, AppData, Program Files, drive root) in time order. Sandbox and Windows system files are excluded.', False),
+        ('A few of the sandbox\'s own files can still appear (for example C:\\agent.py, or a folder named CAPE inside a', False),
+        ('randomly named folder directly under C:\\). Events on those files are NOT damage to a victim: skip them and say so in Notes.', False),
         ('', False),
         ('"Damage" means an irreversible change to a victim file: its content replaced with encrypted/random data,', False),
         ('a rename to a ransomware extension, or a deletion. Ordinary activity (small settings/log writes, readable', False),

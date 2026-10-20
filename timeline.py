@@ -185,6 +185,32 @@ MILESTONES = [
     'victim_overwrite_hi', 'rename_enc', 'victim_delete', 'damage',
 ]
 
+def sample_tree(header):
+    """pids of the sample's own process tree (root = first monitored process, children by parent id)."""
+    procs = header.get('procs', [])
+    kids = collections.defaultdict(list)
+    for x in procs:
+        kids[x.get('ppid')].append(x['pid'])
+    tree, todo = set(), [procs[0]['pid']] if procs else []
+    while todo:
+        pid = todo.pop()
+        if pid not in tree:
+            tree.add(pid); todo.extend(kids.get(pid, []))
+    return tree
+
+
+def attribution_drop_pids(header, tree=None):
+    """pids whose events are not attributed to the sample (launcher shells and Windows helpers).
+
+    For exe/dll packages the root IS the sample, so a listed process is dropped only when it lies OUTSIDE the
+    sample's tree (a cmd.exe the sample itself starts, e.g. 'cmd /c vssadmin', is the sample's own activity);
+    for script/archive packages the root is CAPE's own wrapper shell, so listed names are dropped wherever they occur."""
+    tree = sample_tree(header) if tree is None else tree
+    own_tree_counts = header.get('package') in ('exe', 'dll')
+    return {x['pid'] for x in header.get('procs', []) if x.get('name', '').lower() in IGNORE_PROCS
+            and not (own_tree_counts and x['pid'] in tree)}
+
+
 def process_trace(header, events, sandbox_corpus):
     sandbox = sandbox_dirs_in_trace(events) | sandbox_corpus
     first = {}
@@ -197,24 +223,10 @@ def process_trace(header, events, sandbox_corpus):
     # slui.exe is Windows' licence-activation helper; it calls CryptAcquireContext on its own
     # (seen on the first host's rebuilt VM, never in the original lab), so it is not ransomware signal
     ignore_pids = {x['pid'] for x in header.get('procs', []) if x.get('name', '').lower() == 'slui.exe'}
-    procs = header.get('procs', [])
-    kids = collections.defaultdict(list)
-    for x in procs:
-        kids[x.get('ppid')].append(x['pid'])
-    tree, todo = set(), [procs[0]['pid']] if procs else []   # the sample's own process tree (root = first process)
-    while todo:
-        pid = todo.pop()
-        if pid not in tree:
-            tree.add(pid); todo.extend(kids.get(pid, []))
-    # Drop launcher shells and Windows helpers. For exe/dll packages the root IS the sample, so a listed process is
-    # dropped only when it lies OUTSIDE the sample's tree (a cmd.exe the sample itself starts is the sample's own
-    # activity, e.g. 'cmd /c vssadmin ...'); for script/archive packages the root is CAPE's own wrapper shell, so
-    # listed names are dropped wherever they occur.
-    own_tree_counts = header.get('package') in ('exe', 'dll')
-    ignore_all = {x['pid'] for x in procs if x.get('name', '').lower() in IGNORE_PROCS
-                  and not (own_tree_counts and x['pid'] in tree)}
+    tree = sample_tree(header)
+    ignore_all = attribution_drop_pids(header, tree)
     if TREE_ONLY_CRYPTO:   # sensitivity: crypto calls only from the sample's tree
-        ignore_pids |= {x['pid'] for x in procs if x['pid'] not in tree}
+        ignore_pids |= {x['pid'] for x in header.get('procs', []) if x['pid'] not in tree}
 
     for e in events:
         if ignore_all and e.get('p') in ignore_all:

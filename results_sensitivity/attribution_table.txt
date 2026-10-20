@@ -1,0 +1,19 @@
+naive    damaged=494 median=15.81s
+   enumeration     n=491 (99.4% of damaged)  signal-first= 98%  median lead= 5.70s  zero-loss@1s= 74%
+   crypto context  n=274 (55.5% of damaged)  signal-first= 60%  median lead= 3.73s  zero-loss@0.5s= 59%
+   key generation  n=147 (29.8% of damaged)  signal-first= 78%  median lead= 8.14s  zero-loss@0.5s= 73%
+default  damaged=484 median=16.42s
+   enumeration     n=484 (100.0% of damaged)  signal-first= 96%  median lead= 2.51s  zero-loss@1s= 60%
+   crypto context  n=209 (43.2% of damaged)  signal-first= 76%  median lead= 6.94s  zero-loss@0.5s= 75%
+   key generation  n=120 (24.8% of damaged)  signal-first= 96%  median lead= 9.99s  zero-loss@0.5s= 90%
+tree     damaged=484 median=16.42s
+   enumeration     n=484 (100.0% of damaged)  signal-first= 96%  median lead= 2.51s  zero-loss@1s= 60%
+   crypto context  n=161 (33.3% of damaged)  signal-first= 98%  median lead=10.02s  zero-loss@0.5s= 98%
+   key generation  n=120 (24.8% of damaged)  signal-first= 96%  median lead= 9.99s  zero-loss@0.5s= 90%
+
+first signal differs between the naive and the default analysis (damaged-in-naive samples, n=494):
+   t_enum: 168 of 494 (34%)
+   t_crypto_ctx: 62 of 494 (13%)
+   t_crypto_key: 26 of 494 (5%)
+median first damage over ALL executed analyses with damage (incl. decryptors/other malware): n=497 median=16.16s
+crypto-context monitor (0.5 s): samples losing >= 100 damage events: 27 of 209

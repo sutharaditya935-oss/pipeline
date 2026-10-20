@@ -1,0 +1,5 @@
+samples on both rebuilds: 22
+r1: agree 20 / disagree 2; median onset 16.1 -> 3.7 (pairs reaching damage n=17); rho=0.28; Wilcoxon p=0.0000
+r2: agree 22 / disagree 0; median onset 9.6 -> 5.4 (pairs reaching damage n=19); rho=0.80; Wilcoxon p=0.0002
+r1 excl 674/805: n=15 rho=0.33
+r2 excl 674/805: n=17 rho=0.86

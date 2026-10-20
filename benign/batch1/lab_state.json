@@ -1,0 +1,53 @@
+{
+  "recorded_utc": "2026-10-19T18:32:20+00:00",
+  "host": {
+    "kernel": "6.17.0-14-generic",
+    "qemu": [
+      "QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)"
+    ],
+    "libvirt": "10.0.0"
+  },
+  "cape": {
+    "commit": "5158e04d298c5e15190303ce3839d0e6eca35c24",
+    "branch": "lab-original",
+    "uncommitted_changes": "M analyzer/windows/lib/api/process.py\n M data/linux/linux-syscalls.json\n M data/yara/CAPE/DarkCloud.yar\n M data/yara/CAPE/NetSupport.yar\n M modules/reporting/elasticsearchdb.py\n?? analyzer/linux/modules/auxiliary/sysmon.py\n?? analyzer/linux/modules/auxiliary/tracee.py\n?? analyzer/linux/modules/auxiliary/tracee/\n?? conf/cape-processor.env\n?? conf/cuckoo.conf.bak-before-freespace\n?? conf/cuckoo.conf.bak-before-resultserver\n?? conf/cuckoo.conf.bak-before-timeout120\n?? conf/kvm.conf.bak-before-arch-x64\n?? conf/kvm.conf.bak-before-x64tag\n?? data/capa-rules/\n?? data/cryptopools.py\n?? data/flare-signatures/\n?? data/malicioustlds.txt\n?? data/malpedia.json\n?? data/malpedia.py\n?? data/mbc.json\n?? data/mitre/\n?? data/peutils/\n?? data/scraper_safe_url_list.py\n?? data/security_tools.json\n?? data/sigma/\n?? data/trid/\n?? data/yara/CAPE/AAR.yar\n?? data/yara/CAPE/APT27.yar\n?? data/yara/CAPE/ARCrypt.yar\n?? data/yara/CAPE/AbubasbanditBot.yar\n?? data/yara/CAPE/AcidRain.yar\n?? data/yara/CAPE/ActionRAT.yar\n?? data/yara/CAPE/Adfind.yar\n?? data/yara/CAPE/Adzok.yar\n?? data/yara/CAPE/AgentRacoon.yar\n?? data/yara/CAPE/AgnianeStealer.yar\n?? data/yara/CAPE/Agrius.yar\n?? data/yara/CAPE/Akira.yar\n?? data/yara/CAPE/Alfonso.yar\n?? data/yara/CAPE/AlienCrypter.yar\n?? data/yara/CAPE/AlienSpy.yar\n?? data/yara/CAPE/Alkhal.yar\n?? data/yara/CAPE/AllaKore.yar\n?? data/yara/CAPE/Andromeda.yar\n?? data/yara/CAPE/Ap0calypse.yar\n?? data/yara/CAPE/Apocalypse.yar\n?? data/yara/CAPE/Arcom.yar\n?? data/yara/CAPE/Arechclient2.yar\n?? data/yara/CAPE/ArrowRAT.yar\n?? data/yara/CAPE/Aspire.yar\n?? data/yara/CAPE/Aurora.yar\n?? data/yara/CAPE/Avaddon.yar\n?? data/yara/CAPE/Avalon.yar\n?? data/yara/CAPE/AvosLocker.yar\n?? data/yara/CAPE/BACKSPACE.yar\n?? data/yara/CAPE/BHunt.yar\n?? data/yara/CAPE/Babuk.yar\n?? data/yara/CAPE/BabyLockerKZ.yar\n?? data/yara/CAPE/BackNet.yar\n?? data/yara/CAPE/BackOffLoader.yar\n?? data/yara/CAPE/BackOffPOS.yar\n?? data/yara/CAPE/BadJoke.yar\n?? data/yara/CAPE/Bagle.yar\n?? data/yara/CAPE/Baldr.yar\n?? data/y",
+    "cuckoo.conf": {
+      "cuckoo.machinery": "kvm",
+      "timeouts.default": "120",
+      "timeouts.critical": "60",
+      "resultserver.ip": "192.168.122.1"
+    },
+    "routing.conf": {
+      "routing.route": "none",
+      "routing.internet": "none"
+    },
+    "kvm.conf": {
+      "cuckoo1.ip": "192.168.122.105",
+      "cuckoo1.arch": "x64",
+      "cuckoo1.tags": "x64",
+      "cuckoo1.label": "cuckoo1"
+    }
+  },
+  "vm": {
+    "name": "cuckoo1",
+    "state": "shut off",
+    "vcpus_memory": "Id:             -\nName:           cuckoo1\nUUID:           0b04719c-bdbf-4ed1-a712-91ad87f4cea1\nOS Type:        hvm\nState:          shut off\nCPU(s):         4\nMax memory:     4194304 KiB\nUsed memory:    4194304 KiB\nPersistent:     yes\nAutostart:      disable\nManaged save:   no\nSecurity model: apparmor\nSecurity DOI:   0",
+    "snapshot_current": "clean_dvd_seeded",
+    "snapshot_description": "<description>clean_dvd + 313 seeded user files (benign baseline)</description>",
+    "snapshot_xml_sha256": "9f5b2cda578b9c980bf8cce58cbb32b4584631c746a017f401c7aa968b8c3699",
+    "snapshots": [
+      "clean",
+      "clean_dvd",
+      "clean_dvd_seeded",
+      "clean_julydef"
+    ],
+    "disk": "/mnt/u26/vms/cuckoo1.qcow2",
+    "disk_bytes": 61543415808,
+    "disk_mtime": "2026-10-19T23:44:45",
+    "block_devices": "Target   Source\n-------------------------------------------------------\n sda      /mnt/u26/vms/cuckoo1.qcow2\n sdb      /mnt/u26/vms/win10-enterprise-22h2-eval.iso\n sdc      -",
+    "definition_sha256": "ff03ce32903b2a304440c929e88289267bbe925797b092c98a7a0a836bcb21e7"
+  },
+  "network": {
+    "libvirt_default": "<network>\n  <name>default</name>\n  <uuid>37dd8f85-7651-40e4-bbe7-466182cfc753</uuid>\n  <bridge name='virbr0' stp='on' delay='0'/>\n  <mac address='52:54:00:db:29:22'/>\n  <ip address='192.168.122.1' netmask='255.255.255.0'>\n    <dhcp>\n      <range start='192.168.122.2' end='192.168.122.254'/>\n      <host mac='52:54:00:ca:9e:05' name='cuckoo1' ip='192.168.122.105'/>\n    </dhcp>\n  </ip>\n</network>"
+  }
+}

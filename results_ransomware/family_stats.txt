@@ -1,0 +1,16 @@
+damaged ransomware samples: 484; median 16.42 s, p10 3.81 s
+family            n   median    p10
+LockBit         110    29.43  10.07
+Phobos           81     6.28   5.19
+Conti            76    15.51   6.77
+Dharma           71     6.17   0.23
+REvil            34     5.02   4.16
+Babuk            33     4.89   4.08
+BlackMatter      30    29.51  22.94
+Ryuk             19    87.91  32.77
+Maze              9    19.55  13.36
+unknown           7     3.80   2.23
+family-weighted median (median of 10 per-family medians): 10.89 s
+Kruskal-Wallis over 10 groups: H=157.9, p=2.0e-29; eta^2 of log onset = 0.32
+largest family among damaged: LockBit 110/484 = 23%
+Phobos + Dharma: 152/484 = 31%

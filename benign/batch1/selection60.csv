@@ -1,0 +1,61 @@
+n,program,tier,how,status,planned_task
+1,7-Zip (7zr),hard,script,staged,compress Documents to .7z
+2,zstd,hard,script,staged,compress every Documents file
+3,xz,hard,script,staged,compress a file with LZMA
+4,PeaZip,hard,script (zip pkg),todo,archive Documents
+5,Bandizip,hard,manual,todo,archive Documents
+6,WinRAR (rar.exe),hard,manual,todo,archive with encryption
+7,Windows tar.exe,hard,built-in,todo,tar+gzip Documents
+8,Windows makecab,hard,built-in,todo,cab-compress files
+9,Windows compact /c,hard,built-in,todo,NTFS-compress Documents
+10,PowerShell Compress-Archive,hard,built-in,todo,zip Documents
+11,restic,hard,script,staged,encrypted backup repository
+12,Kopia,hard,script,staged,snapshot a folder
+13,Syncthing,hard,script,staged,start sync node (idle)
+14,rclone,hard,script,retry,copy Documents (local remote)
+15,Duplicati,hard,script (zip pkg),todo,encrypted backup job
+16,FreeFileSync,hard,manual,todo,mirror a folder
+17,Windows Robocopy,hard,built-in,todo,mirror Documents
+18,age,hard,script,staged,encrypt a file
+19,rage,hard,script,staged,encrypt a file
+20,Picocrypt,hard,script,staged,GUI start (idle)
+21,VeraCrypt (portable),hard,manual,todo,create encrypted container
+22,GnuPG (portable),hard,manual,todo,encrypt files with a symmetric key
+23,Windows cipher /e (EFS),hard,built-in,todo,EFS-encrypt a folder
+24,Windows certutil,hard,built-in,todo,encode/hash files
+25,SDelete,hard,script,staged,secure-delete Documents
+26,BleachBit,hard,manual,todo,shred temp files
+27,HandBrakeCLI,ordinary,script,staged,transcode a video
+28,FFmpeg,ordinary,script,todo,transcode audio/video
+29,Node.js,ordinary,script,todo,run a script
+30,Python (embeddable),ordinary,script (zip pkg),todo,run a script
+31,MinGit,ordinary,script (zip pkg),todo,git init and commit
+32,CMake,ordinary,script (zip pkg),todo,configure a project
+33,Notepad++ (portable),ordinary,script (zip pkg),todo,open/edit files
+34,KeePassXC (portable),ordinary,script (zip pkg),todo,create encrypted database
+35,KeePass 2 (portable),ordinary,manual,todo,create encrypted database
+36,Everything (portable),ordinary,script,todo,index files
+37,WinDirStat,ordinary,script,todo,scan disk usage
+38,Sysinternals du,ordinary,script,todo,disk usage
+39,Audacity (portable),ordinary,script (zip pkg),todo,open/export audio
+40,VLC (portable),ordinary,script (zip pkg),todo,play a file
+41,IrfanView,ordinary,manual,todo,batch convert images
+42,XnConvert,ordinary,manual,todo,batch convert images
+43,ImageMagick,ordinary,manual,todo,batch convert images
+44,SumatraPDF,ordinary,manual,todo,open a PDF
+45,PDFsam Basic,ordinary,manual,todo,merge PDFs
+46,Inkscape,ordinary,manual,todo,export SVG
+47,Calibre,ordinary,manual,todo,convert an ebook
+48,ClamAV,ordinary,script (zip pkg),todo,scan Documents
+49,YARA-X,ordinary,script,todo,scan files
+50,Chromium,ordinary,script (zip pkg),todo,start and idle
+51,Firefox,ordinary,manual,todo,start and idle
+52,Brave,ordinary,manual,todo,start and idle
+53,LibreWolf,ordinary,manual,todo,start and idle
+54,Thunderbird,ordinary,manual,todo,start and idle
+55,Obsidian,ordinary,manual,todo,open a vault
+56,Zotero,ordinary,manual,todo,open library
+57,TreeSize Free,ordinary,manual,todo,scan disk usage
+58,VS Code (zip),ordinary,script (zip pkg),todo,open a folder
+59,Go toolchain,ordinary,script (zip pkg),todo,go build a program
+60,Rust/other dev tool (TBD),ordinary,manual,todo,TBD

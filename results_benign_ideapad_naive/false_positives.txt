@@ -1,0 +1,71 @@
+Benign programs: 61; executed (>=1 monitored process): 53; hard cases among executed: 28
+Executed ransomware samples for comparison: 1044
+
+FALSE-POSITIVE RATE by detector signal (executed benign; 95% Wilson interval)
+  file enumeration                            30/53    56.6%  [43.3,  69.0]
+  crypto context                              16/53    30.2%  [19.5,  43.5]
+  key generation/import                       12/53    22.6%  [13.5,  35.5]
+  recovery inhibition                          0/53     0.0%  [ 0.0,   6.8]
+  damage heuristic (irreversible damage)      18/53    34.0%  [22.7,  47.4]
+
+  by hard-case flag:
+    hard_case=no  file enumeration                             7/25    28.0%  [14.3,  47.6]
+    hard_case=no  crypto context                               5/25    20.0%  [ 8.9,  39.1]
+    hard_case=no  key generation/import                        1/25     4.0%  [ 0.7,  19.5]
+    hard_case=no  recovery inhibition                          0/25     0.0%  [ 0.0,  13.3]
+    hard_case=no  damage heuristic (irreversible damage)       2/25     8.0%  [ 2.2,  25.0]
+    hard_case=yes file enumeration                            23/28    82.1%  [64.4,  92.1]
+    hard_case=yes crypto context                              11/28    39.3%  [23.6,  57.6]
+    hard_case=yes key generation/import                       11/28    39.3%  [23.6,  57.6]
+    hard_case=yes recovery inhibition                          0/28     0.0%  [ 0.0,  12.1]
+    hard_case=yes damage heuristic (irreversible damage)      16/28    57.1%  [39.1,  73.5]
+
+  by category (any of enumeration / crypto context / key generation / damage):
+    archiver                     n=  6  any-signal   5  damage-heuristic   2
+    backup                       n=  5  any-signal   3  damage-heuristic   2
+    build                        n=  1  any-signal   0  damage-heuristic   0
+    builtin                      n= 11  any-signal  11  damage-heuristic  11
+    developer                    n=  4  any-signal   1  damage-heuristic   1
+    file-encryption              n=  4  any-signal   2  damage-heuristic   0
+    file-transfer                n=  1  any-signal   0  damage-heuristic   0
+    media                        n=  4  any-signal   2  damage-heuristic   0
+    network                      n=  1  any-signal   0  damage-heuristic   0
+    office                       n=  5  any-signal   3  damage-heuristic   0
+    search                       n=  2  any-signal   1  damage-heuristic   0
+    secure-delete                n=  1  any-signal   1  damage-heuristic   1
+    utility                      n=  8  any-signal   2  damage-heuristic   1
+
+  benign programs flagged by the damage heuristic:
+    B057 Windows xcopy (builtin) t_damage=3.00s
+    B056 Windows tar gzip (builtin) t_damage=2.77s
+    B002 restic (backup) t_damage=12.11s
+    B048 Windows certutil hash (builtin) t_damage=3.02s
+    B050 Windows compact (builtin) t_damage=3.05s
+    B052 Windows expand archive (builtin) t_damage=3.00s
+    B003 kopia (backup) t_damage=4.26s
+    B033 TreeSize Free (utility) t_damage=2.14s
+    B055 Windows robocopy mirror (builtin) t_damage=3.16s
+    B053 Windows get filehash (builtin) t_damage=3.81s
+    B051 Windows compress archive (builtin) t_damage=3.89s
+    B068 gh (developer) t_damage=4.48s
+    B001 zstd (archiver) t_damage=0.72s
+    B054 Windows makecab (builtin) t_damage=3.92s
+    B058 lz4 (archiver) t_damage=1.39s
+    B047 Windows certutil encode (builtin) t_damage=3.58s
+    B049 Windows cipher efs (builtin) t_damage=3.83s
+    B008 sdelete (secure-delete) t_damage=0.44s
+
+OPERATING POINTS: ransomware true-positive rate vs benign false-positive rate
+  (TPR = share of executed ransomware where the detector fires at all;
+   zero-loss = share of firing samples with no damage event before signal + reaction latency)
+  detector                                                    TPR(all)  TPR(dmg)       FPR  zero-loss
+  file enumeration                                               64.4%     99.4%     56.6%      74.1%
+  crypto context                                                 33.5%     55.5%     30.2%      59.1%
+  key generation/import                                          18.8%     29.8%     22.6%      73.5%
+  recovery inhibition                                            18.5%     34.8%      0.0%      24.4%
+  enumeration AND key generation within 2 s                       4.6%      3.6%     20.8%      55.6%
+  enumeration AND crypto context within 2 s                       6.3%      5.7%     26.4%      64.3%
+  enumeration AND key generation within 5 s                       6.2%      6.7%     22.6%      66.7%
+  enumeration AND crypto context within 5 s                      11.6%     14.0%     28.3%      58.0%
+  enumeration AND key generation within 10 s                     10.3%     14.8%     22.6%      78.1%
+  enumeration AND crypto context within 10 s                     16.4%     23.5%     28.3%      68.1%

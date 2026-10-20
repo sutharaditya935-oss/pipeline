@@ -131,6 +131,19 @@ PROC_LAUNCH = {'CreateProcessInternalW', 'NtCreateUserProcess', 'ShellExecuteExW
 
 HIGH_ENTROPY = 7.0   # bits/byte over a >=64-byte captured buffer
 MIN_ENTROPY_LEN = 64
+# Events from these processes are dropped entirely, so milestones and damage are attributed to the sample
+# and the programs it runs, not to launcher shells or Windows helpers that react to the sample starting
+# (dllhost/RuntimeBroker/SmartScreen enumerate directories and powershell.exe fires every crypto signal on
+# its own start-up; an empty PowerShell control fires enumeration, crypto and key-generation signals).
+# (a listed process the sample itself starts is kept: see process_trace). `--all-procs` restores the naive any-process analysis; `--ignore-procs a.exe,b.exe` overrides the list.
+DEFAULT_IGNORE_PROCS = ('cmd.exe,powershell.exe,conhost.exe,findstr.exe,explorer.exe,svchost.exe,dllhost.exe,'
+                        'wmiprvse.exe,runtimebroker.exe,searchindexer.exe,taskhostw.exe,slui.exe,'
+                        'backgroundtaskhost.exe,sihost.exe,ctfmon.exe,smartscreen.exe,onedrive.exe,'
+                        'onedrivestandaloneupdater.exe,wermgr.exe,securityhealthsystray.exe,'
+                        'printfilterpipelinesvc.exe,msmpeng.exe,mpcmdrun.exe,applicationframehost.exe,'
+                        'userinit.exe,mobsync.exe,unsecapp.exe,vdsldr.exe')
+IGNORE_PROCS = set()
+TREE_ONLY_CRYPTO = False   # sensitivity: count crypto calls only from the sample's own process tree
 
 
 def set_thresholds(entropy, min_len):
@@ -184,8 +197,28 @@ def process_trace(header, events, sandbox_corpus):
     # slui.exe is Windows' licence-activation helper; it calls CryptAcquireContext on its own
     # (seen on the first host's rebuilt VM, never in the original lab), so it is not ransomware signal
     ignore_pids = {x['pid'] for x in header.get('procs', []) if x.get('name', '').lower() == 'slui.exe'}
+    procs = header.get('procs', [])
+    kids = collections.defaultdict(list)
+    for x in procs:
+        kids[x.get('ppid')].append(x['pid'])
+    tree, todo = set(), [procs[0]['pid']] if procs else []   # the sample's own process tree (root = first process)
+    while todo:
+        pid = todo.pop()
+        if pid not in tree:
+            tree.add(pid); todo.extend(kids.get(pid, []))
+    # Drop launcher shells and Windows helpers. For exe/dll packages the root IS the sample, so a listed process is
+    # dropped only when it lies OUTSIDE the sample's tree (a cmd.exe the sample itself starts is the sample's own
+    # activity, e.g. 'cmd /c vssadmin ...'); for script/archive packages the root is CAPE's own wrapper shell, so
+    # listed names are dropped wherever they occur.
+    own_tree_counts = header.get('package') in ('exe', 'dll')
+    ignore_all = {x['pid'] for x in procs if x.get('name', '').lower() in IGNORE_PROCS
+                  and not (own_tree_counts and x['pid'] in tree)}
+    if TREE_ONLY_CRYPTO:   # sensitivity: crypto calls only from the sample's tree
+        ignore_pids |= {x['pid'] for x in procs if x['pid'] not in tree}
 
     for e in events:
+        if ignore_all and e.get('p') in ignore_all:
+            continue
         api = e['a']
         t = e['t']
         ok = e.get('ok', False)
@@ -271,7 +304,15 @@ def main():
                     help=f'high-entropy overwrite threshold, bits/byte (default {HIGH_ENTROPY})')
     ap.add_argument('--min-len', type=int, default=MIN_ENTROPY_LEN,
                     help=f'minimum captured bytes for the entropy test (default {MIN_ENTROPY_LEN})')
+    ap.add_argument('--ignore-procs', default=DEFAULT_IGNORE_PROCS,
+                    help='comma-separated process names whose events are dropped entirely (default: wrapper shells and Windows helpers)')
+    ap.add_argument('--all-procs', action='store_true', help='count events from every process (the naive analysis)')
+    ap.add_argument('--tree-only-crypto', action='store_true',
+                    help='sensitivity: count crypto milestones only from the sample\'s own process tree')
     a = ap.parse_args()
+    global TREE_ONLY_CRYPTO, IGNORE_PROCS
+    TREE_ONLY_CRYPTO = a.tree_only_crypto
+    IGNORE_PROCS = set() if a.all_procs else {x.strip().lower() for x in a.ignore_procs.split(',') if x.strip()}
     set_thresholds(a.entropy, a.min_len)
     os.makedirs(a.out, exist_ok=True)
     paths = sorted(glob.glob(os.path.join(a.traces, '*.jsonl.gz')))

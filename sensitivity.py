@@ -15,9 +15,11 @@ import numpy as np
 import pandas as pd
 from lifelines import KaplanMeierFitter
 
-VARIANTS = [  # (name, entropy threshold, min captured bytes)
-    ('H6.5', 6.5, 64), ('H7.0 (default)', 7.0, 64), ('H7.5', 7.5, 64),
-    ('len32', 7.0, 32), ('len128', 7.0, 128),
+VARIANTS = [  # (name, entropy threshold, min captured bytes, extra timeline.py args)
+    ('H6.5', 6.5, 64, []), ('H7.0 (default)', 7.0, 64, []), ('H7.5', 7.5, 64, []),
+    ('len32', 7.0, 32, []), ('len128', 7.0, 128, []),
+    ('crypto in sample tree only', 7.0, 64, ['--tree-only-crypto']),
+    ('all processes (naive)', 7.0, 64, ['--all-procs']),
 ]
 LATENCIES = [0.1, 0.25, 0.5, 1.0, 2.0]
 
@@ -66,11 +68,11 @@ def main():
     keep = set(lab[lab.category == 'ransomware'].task)
 
     rows = []
-    for name, h, n in VARIANTS:
-        d = os.path.join(a.out, name.split()[0])
+    for name, h, n, extra in VARIANTS:
+        d = os.path.join(a.out, name.split()[0] if not extra else ('tree' if extra == ['--tree-only-crypto'] else 'naive'))
         if not os.path.exists(os.path.join(d, 'timelines.csv')):
             subprocess.run([sys.executable, 'timeline.py', '--traces', a.traces, '--out', d,
-                            '--entropy', str(h), '--min-len', str(n)], check=True, stdout=subprocess.DEVNULL)
+                            '--entropy', str(h), '--min-len', str(n)] + extra, check=True, stdout=subprocess.DEVNULL)
         df, dmg = load(d, keep)
         rows.append({'variant': name, 'entropy': h, 'min bytes': n, **headline(df, dmg)})
     tab = pd.DataFrame(rows)

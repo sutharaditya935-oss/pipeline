@@ -1,0 +1,3 @@
+id,name,version,category,hard_case,sha256,package,arguments,timeout,task_id,status,submitted_local
+B004,age,v1.3.2,file-encryption,yes,825ed15d783345c51c13f0df8f0ede83a013e706b778f1cbc22eca823080fafb,zip,,120,811,submitted,2026-10-19 21:54:45
+B005,rage,v0.12.1,file-encryption,yes,2c3fd12f0778b6be490c706d5627df409b953ffe4f35e61596b71a113b86b5bf,zip,,120,812,submitted,2026-10-19 21:54:51

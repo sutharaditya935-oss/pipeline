@@ -1,0 +1,3 @@
+id,name,version,category,hard_case,source_url,license,filename,sha256,package,arguments,timeout,how_run,notes,zip_file
+C001,control empty powershell,n/a,control,no,n/a,n/a,control_empty.ps1,792138f6cd51176b8992490f521acf55bd3ae00ca2e6d92b075c2666c3a415d6,ps1,,120,"control: wrapper only, no real work",control,
+C002,control empty cmd batch,n/a,control,no,n/a,n/a,control_empty_bat.zip,6346fe475d29ff54c363a7078f11e0765f789271957a3f7d1293213ee4473ef5,zip,,120,"control: wrapper only, no real work",control,run.bat

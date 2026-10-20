@@ -99,7 +99,8 @@ def main():
     for w in WINDOWS:
         combos.append((['t_enum', 't_crypto_key'], f'enumeration AND key generation within {w:g} s', 0.5, w))
         combos.append((['t_enum', 't_crypto_ctx'], f'enumeration AND crypto context within {w:g} s', 0.5, w))
-    p(f'  {"detector":58s} {"TPR":>9s} {"FPR":>9s} {"zero-loss":>10s}')
+    rd = r[r.t_damage.notna()]    # ransomware that actually reaches damage: the samples a defender must stop
+    p(f'  {"detector":58s} {"TPR(all)":>9s} {"TPR(dmg)":>9s} {"FPR":>9s} {"zero-loss":>10s}')
     for cols, name, lat, w in combos:
         tp = fired(r, cols, w)
         fp = fired(be, cols, w)
@@ -108,7 +109,8 @@ def main():
         zl = [sum(1 for e in dmg.get(t, []) if e[0] < tg + lat) == 0
               for t, tg, td in zip(trig.task, trig.trig, trig.t_damage) if pd.notna(td)]
         zls = f'{100 * (sum(zl) / len(zl)):5.1f}%' if zl else '   n/a'
-        p(f'  {name:58s} {100 * tp.mean():8.1f}% {100 * fp.mean():8.1f}% {zls:>10s}')
+        tpd = fired(rd, cols, w)
+        p(f'  {name:58s} {100 * tp.mean():8.1f}% {100 * tpd.mean():8.1f}% {100 * fp.mean():8.1f}% {zls:>10s}')
     open(a.out, 'w').write('\n'.join(lines) + '\n')
 
 

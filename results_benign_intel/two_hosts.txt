@@ -1,0 +1,13 @@
+attributable programs 58; executed (monitored process) on both 50; not observed on either: bat, delta, dust, hexyl, hyperfine, keepassxc, lsd, sd
+t_enum        fires i5=21 Ryzen=20 agree 49/50 | both=20 rho=0.94 median Ryzen-i5=+0.56s
+t_crypto_ctx  fires i5= 5 Ryzen= 5 agree 50/50 | both=5 rho=0.90 median Ryzen-i5=+0.45s
+t_crypto_key  fires i5= 1 Ryzen= 1 agree 50/50
+t_damage      fires i5= 7 Ryzen= 7 agree 50/50 | both=7 rho=0.96 median Ryzen-i5=+1.16s
+damage-flagged programs (t_damage i5 / Ryzen):
+  restic         backup         9.12 / 12.11
+  kopia          backup         2.52 / 4.26
+  TreeSize Free  utility        0.98 / 2.14
+  gh             developer      1.45 / 4.48
+  zstd           archiver       0.27 / 0.72
+  lz4            archiver       0.42 / 1.39
+  sdelete        secure-delete  0.14 / 0.44

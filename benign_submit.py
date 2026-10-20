@@ -48,8 +48,13 @@ def main():
         timeout = (r.get('timeout') or a.default_timeout).strip()
         data = {'package': r['package'], 'machine': a.machine, 'timeout': timeout,
                 'custom': f'benign:{r["id"]}'}
+        opts = []
+        if (r.get('zip_file') or '').strip():          # zipped portable app: run this file from the archive
+            opts.append(f'file={r["zip_file"].strip()}')
         if (r.get('arguments') or '').strip():
-            data['options'] = f'arguments={r["arguments"].strip()}'
+            opts.append(f'arguments={r["arguments"].strip()}')
+        if opts:
+            data['options'] = ','.join(opts)            # CAPE options are comma-separated: no commas in arguments
         status, task_id = '', ''
         try:
             with open(os.path.join(a.staging, r['filename']), 'rb') as fh:

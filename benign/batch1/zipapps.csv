@@ -1,0 +1,8 @@
+program,tag,url,zip,zip_sha256,inner_exe,checksum_verified
+cmake,v4.4.4,https://github.com/Kitware/CMake/releases/download/v4.4.4/cmake-4.4.4-windows-x86_64.zip,cmake-4.4.4-windows-x86_64.zip,bace36e94b31c68ab6fa295f26dfa11219e0701cf7c94b0284a7d1cb13dac536,cmake-4.4.4-windows-x86_64/bin/cmake.exe,MATCH
+notepad++,v8.9.8.1,https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.9.8.1/npp.8.9.8.1.portable.x64.zip,npp.8.9.8.1.portable.x64.zip,beddf5548e75c97930d1575ba1c7d113e6e2b33d0a200310e734ca08e225f414,notepad++.exe,no published checksum
+keepassxc,2.7.12,https://github.com/keepassxreboot/keepassxc/releases/download/2.7.12/KeePassXC-2.7.12-Win64.zip,KeePassXC-2.7.12-Win64.zip,958234b0669d757b53eacf42bdd5de0fa1cc1ab7527709ddf4f7e29c06a8305f,KeePassXC-2.7.12-Win64/KeePassXC.exe,MATCH
+peazip,11.4.0,https://github.com/peazip/PeaZip/releases/download/11.4.0/peazip_portable-11.4.0.WIN64.zip,peazip_portable-11.4.0.WIN64.zip,892426473d70e88738c869b336dd06534f84b7eeec3374494514e7ee32b3b833,peazip_portable-11.4.0.WIN64/peazip.exe,no published checksum
+mingit,v2.56.0.windows.2,https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.2/MinGit-2.56.0.2-64-bit.zip,MinGit-2.56.0.2-64-bit.zip,da35e72aa21c005a5a0d298cfbae110bc1609a815730ea0dde84b01a1b3cd3be,cmd/git.exe,no published checksum
+node,v26.12.0,https://nodejs.org/dist/latest/node-v26.12.0-win-x64.zip,node-v26.12.0-win-x64.zip,50efaf01a08c520b4bbe499c09a8c5a5c370002c419c0d9da2c6815d3066a453,node-v26.12.0-win-x64/node.exe,MATCH
+vlc,3.0.24,https://get.videolan.org/vlc/last/win64/vlc-3.0.24-win64.zip,vlc-3.0.24-win64.zip,fcf30850371ad10c9373cc4f0f4501e7dee49e3e9ae9f20c72fb2661a1ca6323,vlc-3.0.24/vlc.exe,MATCH

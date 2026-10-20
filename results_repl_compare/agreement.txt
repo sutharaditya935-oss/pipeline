@@ -1,0 +1,18 @@
+pairs 238; damage on both 133, neither 87, only A 9, only B 9
+agreement on whether damage occurs: 220/238 = 92.4%, Cohen kappa 0.84
+discordant pairs: 18; other machine run ended within 65 s: 6; lasted at least 90 s: 12 (minimum 91.9 s); onset later than 60 s: 4
+discordant by family: LockBit 6, Babuk 5, BlackMatter 2, Ryuk 2, Yurei 1, Phobos 1, Conti 1
+  LockBit: 6 of 61 samples
+  Babuk: 5 of 16 samples
+  BlackMatter: 2 of 12 samples
+excluding 5 runs with an unresponsive guest agent: agreement 93.1% of 233
+family medians where damage on both machines (n >= 6):
+             t_damage_a  t_damage_b   n
+family                                 
+Babuk               3.8         3.0   6
+BlackMatter         7.6         9.0   9
+Conti               6.0         7.8  15
+Dharma              1.8         3.0  16
+LockBit             8.7        10.3  38
+Maze               17.1        17.8   6
+Phobos              5.7         9.3  15

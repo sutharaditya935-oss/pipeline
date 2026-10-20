@@ -1,0 +1,3 @@
+id,name,version,category,hard_case,source_url,license,filename,sha256,package,arguments,timeout,how_run,notes,zip_file
+B004,age,v1.3.2,file-encryption,yes,https://github.com/FiloSottile/age/releases,BSD-3-Clause,bundle_age.zip,825ed15d783345c51c13f0df8f0ede83a013e706b778f1cbc22eca823080fafb,zip,,120,encrypt each Documents file to a fixed age recipient,real batch; bundle of tool + run.bat (tool sha256 2821a4ed191da073),run.bat
+B005,rage,v0.12.1,file-encryption,yes,https://github.com/str4d/rage/releases,MIT/Apache-2.0,bundle_rage.zip,2c3fd12f0778b6be490c706d5627df409b953ffe4f35e61596b71a113b86b5bf,zip,,120,encrypt each Documents file to a fixed age recipient,real batch; bundle of tool + run.bat (tool sha256 69dc313f50df8054),run.bat

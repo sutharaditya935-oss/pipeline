@@ -1,0 +1,62 @@
+id,name,version,category,hard_case,sha256,package,arguments,timeout,task_id,status,submitted_local
+B057,Windows xcopy,Windows 10 22H2,builtin,yes,aa7b20c6ba395af8056f6ef0b09d50ed50e12adda67cf80d8461c835c61dc584,ps1,,120,813,submitted,2026-10-19 22:01:34
+B056,Windows tar gzip,Windows 10 22H2,builtin,yes,0dca348769e4220780e4ba1bad4ea4f290b827fd5500efcbd4b24d0d2f406a58,ps1,,120,814,submitted,2026-10-19 22:01:42
+B002,restic,v0.19.1,backup,yes,722fff20963bba33843c9fb2e5ff9a812765ab06de407a33ee139b696fa18a0e,zip,,120,815,submitted,2026-10-19 22:01:50
+B037,peazip,11.4.0,archiver,yes,892426473d70e88738c869b336dd06534f84b7eeec3374494514e7ee32b3b833,zip,,120,816,submitted,2026-10-19 22:01:59
+B061,gdu,v5.38.0,utility,no,314659458afc7568c3174f2f036cc08bf41c3e4f8005ed963e849cb77642006d,exe,-n C:\Users\analyst\Documents,120,817,submitted,2026-10-19 22:02:07
+B004,age,v1.3.2,file-encryption,yes,825ed15d783345c51c13f0df8f0ede83a013e706b778f1cbc22eca823080fafb,zip,,120,818,submitted,2026-10-19 22:02:16
+B041,ouch,0.8.3,archiver,yes,fa20ca40e4deb95ad6c4f9866c36a6a46cd648bab919880822edeff6b996f946,zip,,120,819,submitted,2026-10-19 22:02:24
+B048,Windows certutil hash,Windows 10 22H2,builtin,yes,f15caa5c2431b24ad258336af751ad22ea2d830513762708023eccf2e407fefd,ps1,,120,820,submitted,2026-10-19 22:02:32
+B042,dust,v1.2.6,utility,no,a5808da05fba9a5ea11019d6692f66b7447a2e517ca6c7c950087d5eeb04d682,exe,C:\Users\analyst\Documents,120,821,submitted,2026-10-19 22:02:40
+B005,rage,v0.12.1,file-encryption,yes,2c3fd12f0778b6be490c706d5627df409b953ffe4f35e61596b71a113b86b5bf,zip,,120,822,submitted,2026-10-19 22:02:48
+B050,Windows compact,Windows 10 22H2,builtin,yes,7f6365845e282aabb439d2826d9461859795aa9f1d21bec47902dfbca32dd8d7,ps1,,120,823,submitted,2026-10-19 22:02:56
+B035,notepad++,v8.9.8.1,office,no,beddf5548e75c97930d1575ba1c7d113e6e2b33d0a200310e734ca08e225f414,zip,C:\Windows\System32\drivers\etc\hosts,120,824,submitted,2026-10-19 22:03:05
+B026,SumatraPDF,3.6.1,office,no,1eee71cccd2ea6e94d5bcea54ee2f759844da3e1a0ee2f6045035b1d17b94381,exe,,120,825,submitted,2026-10-19 22:03:13
+B022,KeePass 2,2.61.1,file-encryption,yes,9923a8b228fe3d8fbe46979991f45d7e0d63f649766596da191eb879b293d38d,exe,/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CURRENTUSER,120,826,submitted,2026-10-19 22:03:21
+B060,croc,v11.5.4,file-transfer,no,72fe266170e1d730d9c5734241f952369554a3c4588576405d3326b59e8a0101,exe,--version,120,827,submitted,2026-10-19 22:03:30
+B032,Zotero,10.0.6,office,no,1cf48672c17c4be057d28b309875204f35b52b7d045d38bb7a1992828828b124,exe,,120,828,submitted,2026-10-19 22:03:41
+B010,xz,v5.8.4,archiver,yes,de428b1337560b4fabff757db77d403931f2dd693678e40b04f5ec550078faba,zip,,120,829,submitted,2026-10-19 22:03:49
+B052,Windows expand archive,Windows 10 22H2,builtin,yes,224fba7d32678deb6990620eb4f610d4c6d2fd95a57de018ffe289ad874a8a4b,ps1,,120,830,submitted,2026-10-19 22:03:57
+B018,rclone,current,backup,yes,41eab3e118d264920b62c3327966c5ece0dc4dd715ee617d9e30450d8ead95a4,exe,copy C:\Users\analyst\Documents C:\Users\analyst\AppData\Local\Temp\rc,120,831,submitted,2026-10-19 22:04:08
+B025,ImageMagick,7.1.2,media,no,1286266aa7aa51646bdb35e292c4f2e55f4775009338ee823663b96ea3774fdc,exe,/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CURRENTUSER,120,832,submitted,2026-10-19 22:04:16
+B011,HandBrakeCLI,1.11.2,media,no,9664c09dd5c5b5a52fd6e2849366b3c86c221b4f63bd8eacec73a3c95bb647ec,exe,--version,120,833,submitted,2026-10-19 22:04:26
+B003,kopia,v0.23.1,backup,yes,f0aa1bbaed91be5e78dbfb0cb170209bb0eb50a5c07d70007c40ea137dbc158d,zip,,120,834,submitted,2026-10-19 22:04:35
+B065,bottom,0.14.9,utility,no,3be92a9795e44a94194852ee446f262523eb701098ee3fabb20852c848ec87d1,exe,--version,120,835,submitted,2026-10-19 22:04:43
+B017,jq,jq-1.8.2,utility,no,a6fc67fedaf9128a3309a1e2ebb8b986aeccf70122ee46d2cb4849e423f0c627,exe,--version,120,836,submitted,2026-10-19 22:04:51
+B027,PDFsam Basic,6.0.6,office,no,210996db06d202a30ac23e23ed3efdf9c3396894481abfbc97bc26945a6c6346,msi,,120,837,submitted,2026-10-19 22:05:02
+B038,mingit,v2.56.0.windows.2,developer,no,da35e72aa21c005a5a0d298cfbae110bc1609a815730ea0dde84b01a1b3cd3be,zip,--version,120,838,submitted,2026-10-19 22:05:11
+B033,TreeSize Free,n/a,utility,no,d800f1765539194a088cd06b2b8a73c40c4a1001425f2a892f495a53db9da2de,exe,/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CURRENTUSER,120,839,submitted,2026-10-19 22:05:20
+B055,Windows robocopy mirror,Windows 10 22H2,builtin,yes,cc9c154eadb5a792d74f5717d9a1c43e666b138084c58cfc980008c3fac3300e,ps1,,120,840,submitted,2026-10-19 22:05:28
+B012,ripgrep,15.2.0,search,no,14231169855ec5205cf5a1b6f1db358ff4aed4247c86b69ce8aae647c77f6680,exe,-c password C:\Users\analyst\Documents,120,841,submitted,2026-10-19 22:05:36
+B009,syncthing,v2.1.6,backup,yes,e33d934db704c9a3c7c46488d34ba655d676ac17234f01f3025740ffa4655dae,exe,--no-browser --home C:\Users\analyst\AppData\Local\Temp\st,120,842,submitted,2026-10-19 22:05:45
+B013,fd,v10.5.0,search,no,d67d27a8e375ed7e9bca2b506a9dd5082bc24547aeba908b863f6f8b8ab0c3b9,exe,-e docx . C:\Users\analyst\Documents,120,843,submitted,2026-10-19 22:05:53
+B014,bat,v0.26.1,utility,no,9ea9f7ab1c27aa5c9390e91543f9f47c6bd17bc53f3e30ac9db762f28f55c4fd,exe,C:\Windows\System32\drivers\etc\hosts,120,844,submitted,2026-10-19 22:06:01
+B067,hexyl,v0.17.0,utility,no,9fa04c965ba6b670580e30f9395c87391fd83bb719d930fa503f92357f40a44a,exe,C:\Windows\System32\drivers\etc\hosts,120,845,submitted,2026-10-19 22:06:09
+B053,Windows get filehash,Windows 10 22H2,builtin,yes,0373e784e14dd07423111367ffaa44acb4090cc02a7ec4abdb2948e38aecbed7,ps1,,120,846,submitted,2026-10-19 22:06:17
+B064,fzf,v0.74.5,utility,no,7cc161c1fd600c747d4c79670f02b3e90de3ac268192482cfd16140b3a82d1f8,exe,--version,120,847,submitted,2026-10-19 22:06:26
+B051,Windows compress archive,Windows 10 22H2,builtin,yes,7d02bcce4ceec6a076f4f5bc24c7cca54b473eb7685d55bb43d8ea3f3c131eee,ps1,,120,848,submitted,2026-10-19 22:06:34
+B062,micro,v2.0.15,office,no,77a8b925c885702b5605b4aebb8e77c7b15e5b03beeb14b7aa7e12b2b8d4ef3f,exe,-version,120,849,submitted,2026-10-19 22:06:42
+B021,BleachBit,6.0.6,utility,yes,a8d27535cdc53e89c21090eabca6026d32c4d385863f8dfc6fc8814bda7881c4,exe,/S,120,850,submitted,2026-10-19 22:06:51
+B068,gh,v2.102.0,developer,no,756724853cc579510b58e65e7a7429ad6b1af29cf99ef19b3a95f3b701c5c580,exe,--version,120,851,submitted,2026-10-19 22:07:00
+B006,picocrypt,1.49,file-encryption,yes,81bbdffb92181a11692ec6651cc1831483ec6041266eb12eba9c71200248a8c4,exe,,120,852,submitted,2026-10-19 22:07:08
+B059,duplicacy,v3.2.5,backup,yes,640a583808cf965682023eab1d323f877beeaf0ebda0cd831bd13bbf6df53292,zip,,120,853,submitted,2026-10-19 22:07:17
+B001,zstd,v1.5.7,archiver,yes,8076aae03feac7c66b319579e82172eed168deed2a3f25e5e2d3c60f55e84111,exe,-r -q -k C:\Users\analyst\Documents,120,854,submitted,2026-10-19 22:07:25
+B016,delta,0.20.1,utility,no,5d8470121b68a9235eb594383dcc8ec5ac786e10f9325771da70a59bc8a57dba,exe,--version,120,855,submitted,2026-10-19 22:07:33
+B036,keepassxc,2.7.12,file-encryption,yes,958234b0669d757b53eacf42bdd5de0fa1cc1ab7527709ddf4f7e29c06a8305f,zip,,120,856,submitted,2026-10-19 22:07:42
+B045,xh,v0.26.2,network,no,d7ed76fc8f171d9b487434d27c0134bd886122232d5a950a43774a4190e8f207,exe,--version,120,857,submitted,2026-10-19 22:07:50
+B039,node,v26.12.0,developer,no,50efaf01a08c520b4bbe499c09a8c5a5c370002c419c0d9da2c6815d3066a453,zip,--version,120,858,submitted,2026-10-19 22:08:00
+B054,Windows makecab,Windows 10 22H2,builtin,yes,e51e98a3acf83ba49754fd229114b16ab96e65d5ec3a787dfe6727854c5928f4,ps1,,120,859,submitted,2026-10-19 22:08:08
+B058,lz4,v1.10.0,archiver,yes,c2b1ecab4289b72ce97257c699d497d3b34387e04f935fb7524c4fa17b05f248,exe,-r -k C:\Users\analyst\Documents,120,860,submitted,2026-10-19 22:08:16
+B044,zoxide,v0.10.0,utility,no,a999a0a7bbf37db5b2ff19c9c46da3d5fe89d3ddc67c793d31e9a9e0dca1eb2b,exe,--version,120,861,submitted,2026-10-19 22:08:24
+B034,cmake,v4.4.4,build,no,bace36e94b31c68ab6fa295f26dfa11219e0701cf7c94b0284a7d1cb13dac536,zip,--version,120,862,submitted,2026-10-19 22:08:33
+B043,sd,v1.1.0,utility,no,68a3be6e02d688ff8ecaf80ef6473cf2516442f01070a4d1a5eb69daa3db5234,exe,--version,120,863,submitted,2026-10-19 22:08:42
+B047,Windows certutil encode,Windows 10 22H2,builtin,yes,ac7a158d34d92a4b94c0ca01cade3155039bed5b1a1573dda2a50319053179f3,ps1,,120,864,submitted,2026-10-19 22:08:50
+B046,just,1.59.0,developer,no,146c26ccfe1e40fadb59183cf8bc17d46c0cdf1bd1e43e52cca686cef0c44627,exe,--version,120,865,submitted,2026-10-19 22:08:58
+B015,hyperfine,v2.0.0,utility,no,e42ed192500a7191296b95d7b60d3a3466423535c7ba2b7d0e97ab389cfec5ca,exe,--version,120,866,submitted,2026-10-19 22:09:06
+B007,7zr,26.04,archiver,yes,256feca8e274e5da655e2a284fabafd9f554365eb164862089dacd4e8276d282,exe,a -t7z C:\Users\analyst\AppData\Local\Temp\docs.7z C:\Users\analyst\Documents\*,120,867,submitted,2026-10-19 22:09:14
+B063,yq,v4.54.1,utility,no,b645f47ebb3a0d2fbab52998550bbd0a1706f23b5ca5f5b48e638c580bb70928,exe,--version,120,868,submitted,2026-10-19 22:09:22
+B049,Windows cipher efs,Windows 10 22H2,builtin,yes,3437476fe79370b5f6c37def7549170cae0d275e2f147b8d305350b9112c66b0,ps1,,120,869,submitted,2026-10-19 22:09:30
+B066,lsd,v1.2.0,utility,no,6d71debe569f70190886c5b11ded5bb068f0aa08298de2d7e011020feaac83e6,exe,-la C:\Users\analyst\Documents,120,870,submitted,2026-10-19 22:09:38
+B040,vlc,3.0.24,media,no,fcf30850371ad10c9373cc4f0f4501e7dee49e3e9ae9f20c72fb2661a1ca6323,zip,--intf dummy --play-and-exit C:\Windows\Media\Alarm01.wav,120,871,submitted,2026-10-19 22:09:49
+B024,XnView MP,n/a,media,no,56aa2e1e968d8c83ca969e1f8ecf5a9d7c3d589ab9d892efa816498983d12735,exe,/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /CURRENTUSER,120,872,submitted,2026-10-19 22:09:59
+B008,sdelete,current,secure-delete,yes,a371980f5893f4ecf3b06b6cde388dc9c6ac2d311b7b5708d61eafa84c5c0b41,exe,-accepteula -s -p 1 C:\Users\analyst\Documents,120,873,submitted,2026-10-19 22:10:07

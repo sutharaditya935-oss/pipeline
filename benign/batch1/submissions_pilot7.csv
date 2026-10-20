@@ -1,0 +1,8 @@
+id,name,version,category,hard_case,sha256,package,arguments,timeout,task_id,status,submitted_local
+B002,restic,v0.19.1,backup,yes,722fff20963bba33843c9fb2e5ff9a812765ab06de407a33ee139b696fa18a0e,zip,,120,804,submitted,2026-10-19 21:37:47
+B004,age,v1.3.2,file-encryption,yes,b3323923a24d37e5a7904dedb8f1c895faa31d7c62c879144313694cfb3ae0a1,zip,,120,805,submitted,2026-10-19 21:37:56
+B041,ouch,0.8.3,archiver,yes,fa20ca40e4deb95ad6c4f9866c36a6a46cd648bab919880822edeff6b996f946,zip,,120,806,submitted,2026-10-19 21:38:04
+B005,rage,v0.12.1,file-encryption,yes,a4bcc82866ed7d0425719c648b10f99a5159dab22bf582ef0f96ec88df6a33ab,zip,,120,807,submitted,2026-10-19 21:38:12
+B010,xz,v5.8.4,archiver,yes,de428b1337560b4fabff757db77d403931f2dd693678e40b04f5ec550078faba,zip,,120,808,submitted,2026-10-19 21:38:20
+B003,kopia,v0.23.1,backup,yes,f0aa1bbaed91be5e78dbfb0cb170209bb0eb50a5c07d70007c40ea137dbc158d,zip,,120,809,submitted,2026-10-19 21:38:28
+B059,duplicacy,v3.2.5,backup,yes,640a583808cf965682023eab1d323f877beeaf0ebda0cd831bd13bbf6df53292,zip,,120,810,submitted,2026-10-19 21:38:37

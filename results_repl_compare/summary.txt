@@ -1,22 +1,22 @@
 pairs: 238 (a = i5-11400H, b = Ryzen 5 5500U); executed on both: 238
 median run length (obs_end): i5-11400H 117.1 s, Ryzen 5 5500U 118.3 s; median API calls: i5-11400H 32028, Ryzen 5 5500U 31292
 
-t_damage: both=133 only-i5-11400H=10 only-Ryzen 5 5500U=9 neither=86
+t_damage: both=133 only-i5-11400H=9 only-Ryzen 5 5500U=9 neither=87
   median i5-11400H=7.42s Ryzen 5 5500U=9.01s | paired diff (B-A) median=+1.37s IQR=[+0.27, +2.72]
-  Spearman rho=0.850 (p=2.8e-38)  Wilcoxon p=4.46e-10  within 2x: 88%
+  Spearman rho=0.851 (p=1.9e-38)  Wilcoxon p=4.33e-10  within 2x: 88%
 
 t_enum: both=170 only-i5-11400H=2 only-Ryzen 5 5500U=6 neither=60
-  median i5-11400H=4.34s Ryzen 5 5500U=4.51s | paired diff (B-A) median=+0.25s IQR=[+0.08, +0.81]
-  Spearman rho=0.894 (p=2.2e-60)  Wilcoxon p=5.28e-09  within 2x: 94%
+  median i5-11400H=5.12s Ryzen 5 5500U=5.30s | paired diff (B-A) median=+0.27s IQR=[+0.08, +1.33]
+  Spearman rho=0.915 (p=3.5e-68)  Wilcoxon p=6.3e-10  within 2x: 94%
 
-t_crypto_ctx: both=90 only-i5-11400H=9 only-Ryzen 5 5500U=6 neither=133
-  median i5-11400H=0.88s Ryzen 5 5500U=1.41s | paired diff (B-A) median=+0.18s IQR=[+0.06, +2.95]
-  Spearman rho=0.942 (p=2.2e-43)  Wilcoxon p=1.2e-05  within 2x: 93%
+t_crypto_ctx: both=87 only-i5-11400H=3 only-Ryzen 5 5500U=3 neither=145
+  median i5-11400H=0.75s Ryzen 5 5500U=0.88s | paired diff (B-A) median=+0.17s IQR=[+0.06, +2.95]
+  Spearman rho=0.948 (p=3.7e-44)  Wilcoxon p=7.92e-06  within 2x: 94%
 
-t_crypto_key: both=51 only-i5-11400H=2 only-Ryzen 5 5500U=1 neither=184
-  median i5-11400H=0.75s Ryzen 5 5500U=1.28s | paired diff (B-A) median=+0.19s IQR=[+0.08, +0.87]
-  Spearman rho=0.946 (p=1.1e-25)  Wilcoxon p=0.00139  within 2x: 92%
+t_crypto_key: both=50 only-i5-11400H=2 only-Ryzen 5 5500U=1 neither=185
+  median i5-11400H=0.70s Ryzen 5 5500U=1.07s | paired diff (B-A) median=+0.19s IQR=[+0.08, +0.84]
+  Spearman rho=0.945 (p=7e-25)  Wilcoxon p=0.00198  within 2x: 92%
 
-t_note: both=107 only-i5-11400H=11 only-Ryzen 5 5500U=17 neither=103
+t_note: both=107 only-i5-11400H=10 only-Ryzen 5 5500U=17 neither=104
   median i5-11400H=7.83s Ryzen 5 5500U=10.25s | paired diff (B-A) median=+1.31s IQR=[+0.19, +3.43]
   Spearman rho=0.840 (p=1.1e-29)  Wilcoxon p=6.42e-05  within 2x: 88%

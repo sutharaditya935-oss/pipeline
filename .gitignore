@@ -29,3 +29,9 @@ results/sig_run.log
 # Benign baseline: downloaded program files and per-batch run data stay local
 benign/*/staging/
 benign/*/reports/
+
+# third-party program binaries fetched for the benign baseline, and regenerable naive-baseline results
+benign/batch1/archives/
+benign/batch1/staging/
+results_naive/
+results_ransomware_naive/
